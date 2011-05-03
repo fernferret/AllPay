@@ -18,9 +18,9 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
  * 
  */
 public class AllPay {
-	private static final String version = ".3";
-	public static final String logPrefix = "[AllPay]";
-	private static final Logger log = Logger.getLogger("Minecraft");
+	private static final String version = ".4";
+	protected static final String logPrefix = "[AllPay]";
+	protected static final Logger log = Logger.getLogger("Minecraft");
 	protected static String prefix;
 	private Plugin plugin;
 	private GenericBank bank;
@@ -29,6 +29,7 @@ public class AllPay {
 		log.info(logPrefix + " - Version " + version + " initialized.");
 		this.plugin = plugin;
 		AllPay.prefix = prefix;
+		loadEconPlugin();
 	}
 	
 	/**
@@ -36,7 +37,7 @@ public class AllPay {
 	 * 
 	 * @return The GenericBank object to process payments.
 	 */
-	public GenericBank loadEconPlugin() {
+	private GenericBank loadEconPlugin() {
 		loadiConomy(); // Supports both 4.x and 5.x
 		loadBOSEconomy();
 		loadRealShopEconomy();
