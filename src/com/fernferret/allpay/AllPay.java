@@ -19,14 +19,13 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
  */
 public class AllPay {
 	private static final String version = ".4";
-	protected static final String logPrefix = "[AllPay]";
+	protected static final String logPrefix = "[AllPay] - Version " + version;
 	protected static final Logger log = Logger.getLogger("Minecraft");
 	protected static String prefix;
 	private Plugin plugin;
 	private GenericBank bank;
 	
 	public AllPay(Plugin plugin, String prefix) {
-		log.info(logPrefix + " - Version " + version + " initialized.");
 		this.plugin = plugin;
 		AllPay.prefix = prefix;
 		loadEconPlugin();
