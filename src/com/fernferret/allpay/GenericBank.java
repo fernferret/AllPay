@@ -117,7 +117,7 @@ public abstract class GenericBank {
 		// If we're here, we have to assume item, this method should only get called from it's children
 		Material m = Material.getMaterial(type);
 		if (m != null) {
-			return m.toString();
+			return amount + m.toString();
 		}
 		return "NO ITEM FOUND";
 	}
