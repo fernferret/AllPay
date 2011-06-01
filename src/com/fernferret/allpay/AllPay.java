@@ -58,7 +58,7 @@ public class AllPay {
 		if (this.bank == null) {
 			Essentials essentialsPlugin = (Essentials) plugin.getServer().getPluginManager().getPlugin("Essentials");
 			if (essentialsPlugin != null) {
-				this.bank = new EssentialsBank(essentialsPlugin);
+				this.bank = new EssentialsBank();
 				log.info(logPrefix + " - hooked into Essentials Economy for " + plugin.getDescription().getFullName());
 			}
 		}

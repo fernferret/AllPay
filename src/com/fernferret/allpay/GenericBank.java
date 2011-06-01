@@ -162,6 +162,10 @@ public abstract class GenericBank {
 			player.sendMessage(ChatColor.DARK_GREEN + AllPay.prefix + ChatColor.WHITE + "You have been charged " + ChatColor.GREEN + getFormattedAmount(price, item));
 	}
 	
+	protected void showError(Player player, String message) {
+		player.sendMessage(ChatColor.DARK_RED + AllPay.prefix + ChatColor.WHITE + message);
+	}
+	
 	/**
 	 * Simply returns the economy being used.
 	 * 
