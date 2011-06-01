@@ -18,7 +18,7 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
  * 
  */
 public class AllPay {
-	private static final String version = ".4";
+	private static final String version = ".5";
 	protected static final String logPrefix = "[AllPay] - Version " + version;
 	protected static final Logger log = Logger.getLogger("Minecraft");
 	protected static String prefix;
