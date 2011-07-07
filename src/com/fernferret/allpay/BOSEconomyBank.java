@@ -14,14 +14,14 @@ public class BOSEconomyBank extends GenericBank {
 	@Override
 	public String getFormattedMoneyAmount(double amount) {
 		if (amount == 1) {
-			return plugin.getMoneyName();
+			return this.plugin.getMoneyName();
 		}
-		return plugin.getMoneyNamePlural();
+		return this.plugin.getMoneyNamePlural();
 	}
 	
 	@Override
 	public boolean hasMoney(Player player, double money, String message) {
-		boolean result = plugin.getPlayerMoney(player.getName()) >= money;
+		boolean result = this.plugin.getPlayerMoney(player.getName()) >= money;
 		if (!result) {
 			userIsTooPoor(player, -1, message);
 		}
@@ -31,7 +31,7 @@ public class BOSEconomyBank extends GenericBank {
 	@Override
 	public void payMoney(Player player, double amount) {
 		int negativePrice = (int) (-1 * Math.abs(amount));
-		plugin.addPlayerMoney(player.getName(), negativePrice, true);
+		this.plugin.addPlayerMoney(player.getName(), negativePrice, true);
 		showReceipt(player, amount, -1);
 	}
 	

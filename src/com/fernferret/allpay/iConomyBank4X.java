@@ -24,7 +24,7 @@ public class iConomyBank4X extends GenericBank {
 	
 	@SuppressWarnings("static-access")
 	public boolean hasMoney(Player player, double money, String message) {
-		boolean result = plugin.getBank().getAccount(player.getName()).hasEnough(money);
+		boolean result = this.plugin.getBank().getAccount(player.getName()).hasEnough(money);
 		if(!result) {
 			userIsTooPoor(player, -1, message);
 		}
@@ -34,13 +34,13 @@ public class iConomyBank4X extends GenericBank {
 	@SuppressWarnings("static-access")
 	@Override
 	public void payMoney(Player player, double amount) {
-		plugin.getBank().getAccount(player.getName()).subtract(amount);
+		this.plugin.getBank().getAccount(player.getName()).subtract(amount);
 		showReceipt(player, amount, -1);
 	}
 
 	@SuppressWarnings("static-access")
 	@Override
 	public String getFormattedMoneyAmount(double amount) {
-		return amount + " " + plugin.getBank().getCurrency();
+		return amount + " " + this.plugin.getBank().getCurrency();
 	}
 }

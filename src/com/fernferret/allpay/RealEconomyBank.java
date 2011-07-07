@@ -14,12 +14,12 @@ public class RealEconomyBank extends GenericBank {
 	@Override
 	public String getFormattedMoneyAmount(double amount) {
 		// NOTE: This plugin does not support currency plurals
-		return plugin.getCurrency();
+		return this.plugin.getCurrency();
 	}
 	
 	@Override
 	public boolean hasMoney(Player player, double money, String message) {
-		boolean result = plugin.getBalance(player.getName()) >= money;
+		boolean result = this.plugin.getBalance(player.getName()) >= money;
 		if (!result) {
 			userIsTooPoor(player, -1, message);
 		}
@@ -28,8 +28,8 @@ public class RealEconomyBank extends GenericBank {
 	
 	@Override
 	public void payMoney(Player player, double amount) {
-		double totalmoney = plugin.getBalance(player.getName());
-		plugin.setBalance(player.getName(), totalmoney - amount);
+		double totalmoney = this.plugin.getBalance(player.getName());
+		this.plugin.setBalance(player.getName(), totalmoney - amount);
 		showReceipt(player, amount, -1);
 	}
 	

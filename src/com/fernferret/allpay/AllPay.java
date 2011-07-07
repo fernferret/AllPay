@@ -56,20 +56,20 @@ public class AllPay {
 	
 	private void loadEssentialsEconomoy() {
 		if (this.bank == null) {
-			Essentials essentialsPlugin = (Essentials) plugin.getServer().getPluginManager().getPlugin("Essentials");
+			Essentials essentialsPlugin = (Essentials) this.plugin.getServer().getPluginManager().getPlugin("Essentials");
 			if (essentialsPlugin != null) {
 				this.bank = new EssentialsBank();
-				log.info(logPrefix + " - hooked into Essentials Economy for " + plugin.getDescription().getFullName());
+				log.info(logPrefix + " - hooked into Essentials Economy for " + this.plugin.getDescription().getFullName());
 			}
 		}
 	}
 	
 	private void loadRealShopEconomy() {
 		if (this.bank == null) {
-			Plugin realShopPlugin = plugin.getServer().getPluginManager().getPlugin("RealShop");
+			Plugin realShopPlugin = this.plugin.getServer().getPluginManager().getPlugin("RealShop");
 			if (realShopPlugin != null) {
 				RealEconomy realEconPlugin = new RealEconomy((RealPlugin) realShopPlugin);
-				log.info(logPrefix + " - hooked into RealEconomy for " + plugin.getDescription().getFullName());
+				log.info(logPrefix + " - hooked into RealEconomy for " + this.plugin.getDescription().getFullName());
 				this.bank = new RealEconomyBank(realEconPlugin);
 			}
 		}
@@ -77,10 +77,10 @@ public class AllPay {
 	
 	private void loadBOSEconomy() {
 		if (this.bank == null) {
-			BOSEconomy boseconPlugin = (BOSEconomy) plugin.getServer().getPluginManager().getPlugin("BOSEconomy");
+			BOSEconomy boseconPlugin = (BOSEconomy) this.plugin.getServer().getPluginManager().getPlugin("BOSEconomy");
 			if (boseconPlugin != null) {
 				this.bank = new BOSEconomyBank(boseconPlugin);
-				log.info(logPrefix + " - hooked into BOSEconomy " + plugin.getDescription().getFullName());
+				log.info(logPrefix + " - hooked into BOSEconomy " + this.plugin.getDescription().getFullName());
 			}
 		}
 	}
@@ -88,17 +88,17 @@ public class AllPay {
 	private void loadDefaultItemEconomy() {
 		if (this.bank == null) {
 			this.bank = new ItemBank();
-			log.info(logPrefix + " - using only an item based economy for " + plugin.getDescription().getFullName());
+			log.info(logPrefix + " - using only an item based economy for " + this.plugin.getDescription().getFullName());
 		}
 	}
 	
 	private void loadiConomy() {
 		if (this.bank == null) {
-			Plugin iConomyTest = plugin.getServer().getPluginManager().getPlugin("iConomy");
+			Plugin iConomyTest = this.plugin.getServer().getPluginManager().getPlugin("iConomy");
 			try {
 				if (iConomyTest != null && iConomyTest instanceof com.iConomy.iConomy) {
 					this.bank = new iConomyBank((iConomy) iConomyTest);
-					log.info(logPrefix + " - hooked into iConomy for " + plugin.getDescription().getFullName());
+					log.info(logPrefix + " - hooked into iConomy for " + this.plugin.getDescription().getFullName());
 				}
 			} catch (NoClassDefFoundError e) {
 				if (iConomyTest != null) {
@@ -109,10 +109,10 @@ public class AllPay {
 	}
 	
 	private void loadiConomy4X() {
-		com.nijiko.coelho.iConomy.iConomy iConomyPlugin = (com.nijiko.coelho.iConomy.iConomy) plugin.getServer().getPluginManager().getPlugin("iConomy");
+		com.nijiko.coelho.iConomy.iConomy iConomyPlugin = (com.nijiko.coelho.iConomy.iConomy) this.plugin.getServer().getPluginManager().getPlugin("iConomy");
 		if (iConomyPlugin != null) {
 			this.bank = new iConomyBank4X(iConomyPlugin);
-			log.info(logPrefix + " - hooked into iConomy(4.X) for " + plugin.getDescription().getFullName());
+			log.info(logPrefix + " - hooked into iConomy(4.X) for " + this.plugin.getDescription().getFullName());
 		}
 	}
 	
