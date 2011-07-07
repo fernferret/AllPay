@@ -29,7 +29,6 @@ public class AllPay {
 	public AllPay(Plugin plugin, String prefix) {
 		this.plugin = plugin;
 		AllPay.prefix = prefix;
-		loadEconPlugin();
 	}
 	
 	/**
@@ -37,7 +36,7 @@ public class AllPay {
 	 * 
 	 * @return The GenericBank object to process payments.
 	 */
-	private GenericBank loadEconPlugin() {
+	public GenericBank loadEconPlugin() {
 		loadiConomy(); // Supports both 4.x and 5.x
 		loadBOSEconomy();
 		loadRealShopEconomy();
