@@ -20,11 +20,12 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
 public class AllPay {
 	private static final String version = ".5";
 	protected static final String logPrefix = "[AllPay] - Version " + version;
+	
 	protected static final Logger log = Logger.getLogger("Minecraft");
 	protected static String prefix;
 	private Plugin plugin;
 	private GenericBank bank;
-	
+	public final static String[] validEconPlugins = {"Essentials", "RealShop", "BOSEconomy", "iConomy"};
 	public AllPay(Plugin plugin, String prefix) {
 		this.plugin = plugin;
 		AllPay.prefix = prefix;
@@ -65,7 +66,7 @@ public class AllPay {
 	}
 	
 	private void loadRealShopEconomy() {
-		if (this.bank == null) {
+		if (this.bank == null && !(this.bank instanceof EssentialsBank)) {
 			Plugin realShopPlugin = this.plugin.getServer().getPluginManager().getPlugin("RealShop");
 			if (realShopPlugin != null) {
 				RealEconomy realEconPlugin = new RealEconomy((RealPlugin) realShopPlugin);
@@ -76,7 +77,7 @@ public class AllPay {
 	}
 	
 	private void loadBOSEconomy() {
-		if (this.bank == null) {
+		if (this.bank == null && !(this.bank instanceof EssentialsBank)) {
 			BOSEconomy boseconPlugin = (BOSEconomy) this.plugin.getServer().getPluginManager().getPlugin("BOSEconomy");
 			if (boseconPlugin != null) {
 				this.bank = new BOSEconomyBank(boseconPlugin);
@@ -93,7 +94,7 @@ public class AllPay {
 	}
 	
 	private void loadiConomy() {
-		if (this.bank == null) {
+		if (this.bank == null && !(this.bank instanceof EssentialsBank)) {
 			Plugin iConomyTest = this.plugin.getServer().getPluginManager().getPlugin("iConomy");
 			try {
 				if (iConomyTest != null && iConomyTest instanceof com.iConomy.iConomy) {
