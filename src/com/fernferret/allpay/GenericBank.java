@@ -94,6 +94,7 @@ public abstract class GenericBank {
 		} else {
 			player.getInventory().remove(item);
 		}
+		showReceipt(player, amount, type);
 	}
 	
 	public abstract void payMoney(Player player, double amount);
