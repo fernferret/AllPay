@@ -15,9 +15,6 @@ public abstract class GenericBank {
 	 * @return true if they have enough items false if not.
 	 */
 	public final boolean hasItem(Player player, double amount, int type, String message) {
-		if (amount == 0) {
-			return true;
-		}
 		// TODO: Make this inventory
 		ItemStack item = player.getItemInHand();
 		boolean hasEnough = (item.getTypeId() == type && item.getAmount() >= amount);
@@ -59,6 +56,9 @@ public abstract class GenericBank {
 	 * @return true if they have enough money/items false if not.
 	 */
 	public final boolean hasEnough(Player player, double amount, int type, String message) {
+	    if (amount == 0) {
+            return true;
+        }
 		if (type == -1) {
 			return hasMoney(player, amount, message);
 		} else {
