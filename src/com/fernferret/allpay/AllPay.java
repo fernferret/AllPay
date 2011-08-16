@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.Plugin;
 
 import com.earth2me.essentials.Essentials;
-import com.iConomy.iConomy;
 
 import cosine.boseconomy.BOSEconomy;
 import fr.crafter.tickleman.RealEconomy.RealEconomy;
@@ -15,7 +14,6 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
  * AllPay is a nifty little payment wrapper class that takes the heavy lifting out of integrating payments into your plugin!
  * 
  * @author Eric Stokes
- * 
  */
 public class AllPay {
     private static final String version = ".5.1";
@@ -101,14 +99,25 @@ public class AllPay {
         if (this.bank == null && !(this.bank instanceof EssentialsBank)) {
             Plugin iConomyTest = this.plugin.getServer().getPluginManager().getPlugin("iConomy");
             try {
-                if (iConomyTest != null && iConomyTest instanceof com.iConomy.iConomy) {
-                    this.bank = new iConomyBank((iConomy) iConomyTest);
-                    log.info(logPrefix + " - hooked into iConomy for " + this.plugin.getDescription().getFullName());
+                if (iConomyTest != null && iConomyTest instanceof com.iCo6.iConomy) {
+                    this.bank = new iConomyBank6X();
+                    log.info(logPrefix + " - hooked into iConomy 6 for " + this.plugin.getDescription().getFullName());
                 }
             } catch (NoClassDefFoundError e) {
-                if (iConomyTest != null) {
-                    loadiConomy4X();
-                }
+                loadiConomy5X(iConomyTest);
+            }
+        }
+    }
+
+    private void loadiConomy5X(Plugin iConomyTest) {
+        try {
+            if (iConomyTest != null && iConomyTest instanceof com.iConomy.iConomy) {
+                this.bank = new iConomyBank5X();
+                log.info(logPrefix + " - hooked into iConomy 5 for " + this.plugin.getDescription().getFullName());
+            }
+        } catch (NoClassDefFoundError ex) {
+            if (iConomyTest != null) {
+                loadiConomy4X();
             }
         }
     }
@@ -117,7 +126,7 @@ public class AllPay {
         com.nijiko.coelho.iConomy.iConomy iConomyPlugin = (com.nijiko.coelho.iConomy.iConomy) this.plugin.getServer().getPluginManager().getPlugin("iConomy");
         if (iConomyPlugin != null) {
             this.bank = new iConomyBank4X(iConomyPlugin);
-            log.info(logPrefix + " - hooked into iConomy(4.X) for " + this.plugin.getDescription().getFullName());
+            log.info(logPrefix + " - hooked into iConomy 4 for " + this.plugin.getDescription().getFullName());
         }
     }
 

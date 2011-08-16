@@ -19,7 +19,7 @@ public class iConomyBank4X extends GenericBank {
 	
 	@Override
 	public String getEconUsed() {
-		return " using iConomy(4X)!";
+		return "iConomy 4";
 	}
 	
 	@SuppressWarnings("static-access")
