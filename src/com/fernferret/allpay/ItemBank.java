@@ -11,19 +11,19 @@ import org.bukkit.entity.Player;
 public class ItemBank extends GenericBank {
 	
 	@Override
-	public String getFormattedMoneyAmount(double amount) {
+	protected String getFormattedMoneyAmount(Player player, double amount) {
 		return "";
 	}
 	
 	@Override
-	public boolean hasMoney(Player player, double money, String message) {
+	protected boolean hasMoney(Player player, double money, String message) {
 		// The player always has enough money in this bank
 		// someone needs to configure a bank differently if they're getting here...
 		return true;
 	}
 	
 	@Override
-	public void payMoney(Player player, double amount) {
+	protected void payMoney(Player player, double amount) {
 		// No need to take anything away here, someone needs to configure a bank differently if they're getting here...
 	}
 	

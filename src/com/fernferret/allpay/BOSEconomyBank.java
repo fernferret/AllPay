@@ -12,11 +12,8 @@ public class BOSEconomyBank extends GenericBank {
 	}
 	
 	@Override
-	public String getFormattedMoneyAmount(double amount) {
-		if (amount == 1) {
-			return amount + " " + this.plugin.getMoneyName();
-		}
-		return amount + " " + this.plugin.getMoneyNamePlural();
+	public String getFormattedMoneyAmount(Player player, double amount) {
+		return this.formatCurrency(amount, this.plugin.getMoneyName(), this.plugin.getMoneyNamePlural());
 	}
 	
 	@Override

@@ -23,7 +23,7 @@ public class iConomyBank6X extends GenericBank {
     }
 
     @Override
-    public boolean hasMoney(Player player, double money, String message) {
+    protected boolean hasMoney(Player player, double money, String message) {
 
         boolean result = this.accounts.get(player.getName()).getHoldings().hasEnough(money);
         if (!result) {
@@ -33,13 +33,13 @@ public class iConomyBank6X extends GenericBank {
     }
 
     @Override
-    public void payMoney(Player player, double amount) {
+    protected void payMoney(Player player, double amount) {
         this.accounts.get(player.getName()).getHoldings().subtract(amount);
         showReceipt(player, amount, -1);
     }
 
     @Override
-    public String getFormattedMoneyAmount(double amount) {
+    protected String getFormattedMoneyAmount(Player player, double amount) {
         return iConomy.format(amount);
     }
 }

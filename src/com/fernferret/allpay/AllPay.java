@@ -16,7 +16,7 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
  * @author Eric Stokes
  */
 public class AllPay {
-    private static final String version = "1.0.1";
+    private static final String version = "1.0.2";
     protected static final String logPrefix = "[AllPay] - Version " + version;
 
     protected static final Logger log = Logger.getLogger("Minecraft");
@@ -81,9 +81,10 @@ public class AllPay {
 
     private void loadBOSEconomy() {
         if (this.bank == null && !(this.bank instanceof EssentialsBank)) {
-            BOSEconomy boseconPlugin = (BOSEconomy) this.plugin.getServer().getPluginManager().getPlugin("BOSEconomy");
+            Plugin boseconPlugin = this.plugin.getServer().getPluginManager().getPlugin("BOSEconomy");
             if (boseconPlugin != null) {
-                this.bank = new BOSEconomyBank(boseconPlugin);
+
+                this.bank = new BOSEconomyBank((BOSEconomy) boseconPlugin);
                 log.info(logPrefix + " - hooked into BOSEconomy " + this.plugin.getDescription().getFullName());
             }
         }

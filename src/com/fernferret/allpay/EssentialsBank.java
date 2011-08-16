@@ -19,7 +19,7 @@ public class EssentialsBank extends GenericBank {
 	}
 
 	@Override
-	public String getFormattedMoneyAmount(double amount) {
+	public String getFormattedMoneyAmount(Player player, double amount) {
 		return Economy.format(amount);
 	}
 

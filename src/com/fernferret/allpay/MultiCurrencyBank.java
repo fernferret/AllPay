@@ -1,22 +1,23 @@
 package com.fernferret.allpay;
 
+import me.ashtheking.currency.CurrencyList;
+
 import org.bukkit.entity.Player;
-import com.nijiko.coelho.iConomy.iConomy;
 
 /**
- * Adapter class for iConomy 4
+ * Adapter class for MultiCurrency
  * 
  * @author Eric Stokes
  */
-public class iConomyBank4X extends GenericBank {
+public class MultiCurrencyBank extends GenericBank {
 
     @Override
     public String getEconUsed() {
-        return "iConomy 4";
+        return "MultiCurrency";
     }
 
     protected boolean hasMoney(Player player, double money, String message) {
-        boolean result = iConomy.getBank().getAccount(player.getName()).hasEnough(money);
+        boolean result = CurrencyList.hasEnough(player.getName(), money);
         if (!result) {
             userIsTooPoor(player, -1, message);
         }
@@ -25,13 +26,12 @@ public class iConomyBank4X extends GenericBank {
 
     @Override
     protected void payMoney(Player player, double amount) {
-        iConomy.getBank().getAccount(player.getName()).subtract(amount);
+        CurrencyList.subtract(player.getName(), amount);
         showReceipt(player, amount, -1);
     }
-    
 
     @Override
     protected String getFormattedMoneyAmount(Player player, double amount) {
-        return amount + " " + iConomy.getBank().getCurrency();
+        return this.formatCurrency(amount, ((String) CurrencyList.maxCurrency(player.getName())[0]), null);
     }
 }
