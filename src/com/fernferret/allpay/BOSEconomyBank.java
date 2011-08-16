@@ -14,9 +14,9 @@ public class BOSEconomyBank extends GenericBank {
 	@Override
 	public String getFormattedMoneyAmount(double amount) {
 		if (amount == 1) {
-			return this.plugin.getMoneyName();
+			return amount + " " + this.plugin.getMoneyName();
 		}
-		return this.plugin.getMoneyNamePlural();
+		return amount + " " + this.plugin.getMoneyNamePlural();
 	}
 	
 	@Override
@@ -37,7 +37,7 @@ public class BOSEconomyBank extends GenericBank {
 	
 	@Override
 	public String getEconUsed() {
-		return " using BOSEconomy!";
+		return "BOSEconomy";
 	}
 	
 }

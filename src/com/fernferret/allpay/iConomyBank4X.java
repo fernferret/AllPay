@@ -4,43 +4,33 @@ import org.bukkit.entity.Player;
 import com.nijiko.coelho.iConomy.iConomy;
 
 /**
- * Adapter class for iConomy
- * Spoke with author, he requested all calls were made directly
- * This is the reason for all of the static-access warnings
+ * Adapter class for iConomy 4
+ * 
  * @author Eric Stokes
- *
  */
 public class iConomyBank4X extends GenericBank {
-	private iConomy plugin;
-	
-	public iConomyBank4X(iConomy plugin) {
-		this.plugin = plugin;
-	}
-	
-	@Override
-	public String getEconUsed() {
-		return "iConomy 4";
-	}
-	
-	@SuppressWarnings("static-access")
-	public boolean hasMoney(Player player, double money, String message) {
-		boolean result = this.plugin.getBank().getAccount(player.getName()).hasEnough(money);
-		if(!result) {
-			userIsTooPoor(player, -1, message);
-		}
-		return result;
-	}
-	
-	@SuppressWarnings("static-access")
-	@Override
-	public void payMoney(Player player, double amount) {
-		this.plugin.getBank().getAccount(player.getName()).subtract(amount);
-		showReceipt(player, amount, -1);
-	}
 
-	@SuppressWarnings("static-access")
-	@Override
-	public String getFormattedMoneyAmount(double amount) {
-		return amount + " " + this.plugin.getBank().getCurrency();
-	}
+    @Override
+    public String getEconUsed() {
+        return "iConomy 4";
+    }
+
+    public boolean hasMoney(Player player, double money, String message) {
+        boolean result = iConomy.getBank().getAccount(player.getName()).hasEnough(money);
+        if (!result) {
+            userIsTooPoor(player, -1, message);
+        }
+        return result;
+    }
+
+    @Override
+    public void payMoney(Player player, double amount) {
+        iConomy.getBank().getAccount(player.getName()).subtract(amount);
+        showReceipt(player, amount, -1);
+    }
+
+    @Override
+    public String getFormattedMoneyAmount(double amount) {
+        return amount + " " + iConomy.getBank().getCurrency();
+    }
 }

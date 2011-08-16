@@ -16,18 +16,18 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
  * @author Eric Stokes
  */
 public class AllPay {
-    private static final String version = ".5.1";
+    private static final String version = "1.0.1";
     protected static final String logPrefix = "[AllPay] - Version " + version;
 
     protected static final Logger log = Logger.getLogger("Minecraft");
-    protected static String prefix;
+    private String prefix;
     private Plugin plugin;
     private GenericBank bank;
     public final static String[] validEconPlugins = { "Essentials", "RealShop", "BOSEconomy", "iConomy" };
 
     public AllPay(Plugin plugin, String prefix) {
         this.plugin = plugin;
-        AllPay.prefix = prefix;
+        this.prefix = prefix;
     }
 
     /**
@@ -41,6 +41,7 @@ public class AllPay {
         loadRealShopEconomy();
         loadEssentialsEconomoy();
         loadDefaultItemEconomy();
+        this.bank.setPrefix(this.prefix);
         return this.bank;
     }
 
@@ -125,7 +126,7 @@ public class AllPay {
     private void loadiConomy4X() {
         com.nijiko.coelho.iConomy.iConomy iConomyPlugin = (com.nijiko.coelho.iConomy.iConomy) this.plugin.getServer().getPluginManager().getPlugin("iConomy");
         if (iConomyPlugin != null) {
-            this.bank = new iConomyBank4X(iConomyPlugin);
+            this.bank = new iConomyBank4X();
             log.info(logPrefix + " - hooked into iConomy 4 for " + this.plugin.getDescription().getFullName());
         }
     }

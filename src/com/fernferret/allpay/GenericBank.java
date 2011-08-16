@@ -6,7 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class GenericBank {
-	/**
+	private String prefix;
+
+    /**
 	 * Check to ensure the player has enough items for a transaction.
 	 * 
 	 * @param player Check this player's item in hand.
@@ -139,7 +141,6 @@ public abstract class GenericBank {
 	 * @param player
 	 * @param item
 	 * @param message This message will appear after the sentence that follows: "{prefix}Sorry but you do not have the required [funds|items] {message}"
-	 * @param prefix A prefix to show which plugin charged the user, if you don't want this, just put ""
 	 */
 	protected final void userIsTooPoor(Player player, int item, String message) {
 		String type = (item == -1) ? "funds" : "items";
@@ -148,7 +149,7 @@ public abstract class GenericBank {
 		} else {
 			message = " " + message;
 		}
-		player.sendMessage(ChatColor.DARK_RED + AllPay.prefix + ChatColor.WHITE + "Sorry but you do not have the required " + type + message);
+		player.sendMessage(ChatColor.DARK_RED + this.prefix + ChatColor.WHITE + "Sorry but you do not have the required " + type + message);
 	}
 	
 	/**
@@ -160,11 +161,11 @@ public abstract class GenericBank {
 	 */
 	protected void showReceipt(Player player, double price, int item) {
 		if (price > 0)
-			player.sendMessage(ChatColor.DARK_GREEN + AllPay.prefix + ChatColor.WHITE + "You have been charged " + ChatColor.GREEN + getFormattedAmount(price, item));
+			player.sendMessage(ChatColor.DARK_GREEN + this.prefix + ChatColor.WHITE + "You have been charged " + ChatColor.GREEN + getFormattedAmount(price, item));
 	}
 	
 	protected void showError(Player player, String message) {
-		player.sendMessage(ChatColor.DARK_RED + AllPay.prefix + ChatColor.WHITE + message);
+		player.sendMessage(ChatColor.DARK_RED + this.prefix + ChatColor.WHITE + message);
 	}
 	
 	/**
@@ -173,4 +174,8 @@ public abstract class GenericBank {
 	 * @return The economy plugin used
 	 */
 	public abstract String getEconUsed();
+	
+	public final void setPrefix(String prefix) {
+	    this.prefix = prefix;
+	}
 }

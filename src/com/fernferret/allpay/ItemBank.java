@@ -10,10 +10,6 @@ import org.bukkit.entity.Player;
  */
 public class ItemBank extends GenericBank {
 	
-	public ItemBank() {
-		
-	}
-	
 	@Override
 	public String getFormattedMoneyAmount(double amount) {
 		return "";
@@ -43,7 +39,6 @@ public class ItemBank extends GenericBank {
 	
 	@Override
 	public String getEconUsed() {
-		// TODO Auto-generated method stub
-		return " using simple items as economy!";
+		return "Simple Item Economy";
 	}
 }

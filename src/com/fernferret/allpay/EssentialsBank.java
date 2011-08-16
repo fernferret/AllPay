@@ -15,7 +15,7 @@ public class EssentialsBank extends GenericBank {
 
 	@Override
 	public String getEconUsed() {
-		return " using Essentials Economy!";
+		return "Essentials Economy";
 	}
 
 	@Override

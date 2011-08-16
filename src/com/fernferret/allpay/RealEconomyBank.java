@@ -35,7 +35,7 @@ public class RealEconomyBank extends GenericBank {
 	
 	@Override
 	public String getEconUsed() {
-		return " using RealEconomy!";
+		return "RealEconomy";
 	}
 	
 }
