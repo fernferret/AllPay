@@ -43,6 +43,16 @@ public class EssentialsBank extends GenericBank {
 			showError(player, "Your bank doesn't allow loans!");
 		}
 		// Don't need to show receipt, Essentials already does
-		
 	}
+
+    @Override
+    protected double getMoneyBalance(Player p) {
+        try {
+            return Economy.getMoney(p.getName());
+        } catch (UserDoesNotExistException e) {
+            showError(p, "You don't have an account!");
+            return 0;
+        }
+    }
+	
 }

@@ -24,7 +24,6 @@ public abstract class GenericBank {
             userIsTooPoor(player, type, message);
         }
         return hasEnough;
-
     }
 
     /**
@@ -189,5 +188,22 @@ public abstract class GenericBank {
         } else {
             return amount + " " + currencyPlural;
         }
+    }
+    
+    public double getBalance(Player p, int itemId) {
+        if(itemId == -1) {
+            return getMoneyBalance(p);
+        }
+        return getItemAnount(p, itemId);
+    }
+    protected abstract double getMoneyBalance(Player p);
+
+    protected final int getItemAnount(Player player, int type) {
+        // TODO: Make this inventory
+        ItemStack item = player.getItemInHand();
+        if(item.getTypeId() != type) {
+            return 0;
+        }
+        return item.getAmount();
     }
 }

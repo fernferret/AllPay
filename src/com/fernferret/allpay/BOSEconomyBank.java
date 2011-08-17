@@ -36,5 +36,10 @@ public class BOSEconomyBank extends GenericBank {
 	public String getEconUsed() {
 		return "BOSEconomy";
 	}
+
+    @Override
+    protected double getMoneyBalance(Player p) {
+        return this.plugin.getPlayerMoney(p.getName());
+    }
 	
 }

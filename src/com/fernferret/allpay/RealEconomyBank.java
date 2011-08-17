@@ -37,5 +37,10 @@ public class RealEconomyBank extends GenericBank {
 	public String getEconUsed() {
 		return "RealEconomy";
 	}
+
+    @Override
+    protected double getMoneyBalance(Player p) {
+        return this.plugin.getBalance(p.getName());
+    }
 	
 }

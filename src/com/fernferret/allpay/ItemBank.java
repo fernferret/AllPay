@@ -41,4 +41,10 @@ public class ItemBank extends GenericBank {
 	public String getEconUsed() {
 		return "Simple Item Economy";
 	}
+
+    @Override
+    protected double getMoneyBalance(Player p) {
+        // Should never get here...
+        return 0;
+    }
 }

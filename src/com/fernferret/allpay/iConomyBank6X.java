@@ -42,4 +42,9 @@ public class iConomyBank6X extends GenericBank {
     protected String getFormattedMoneyAmount(Player player, double amount) {
         return iConomy.format(amount);
     }
+
+    @Override
+    protected double getMoneyBalance(Player p) {
+        return this.accounts.get(p.getName()).getHoldings().getBalance();
+    }
 }
