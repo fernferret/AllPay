@@ -4,8 +4,6 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.Plugin;
 
-import com.earth2me.essentials.Essentials;
-
 import cosine.boseconomy.BOSEconomy;
 import fr.crafter.tickleman.RealEconomy.RealEconomy;
 import fr.crafter.tickleman.RealPlugin.RealPlugin;
@@ -57,7 +55,7 @@ public class AllPay {
     private void loadEssentialsEconomoy() {
         if (this.bank == null) {
             try {
-                Essentials essentialsPlugin = (Essentials) this.plugin.getServer().getPluginManager().getPlugin("Essentials");
+                Plugin essentialsPlugin = this.plugin.getServer().getPluginManager().getPlugin("Essentials");
                 if (essentialsPlugin != null) {
                     this.bank = new EssentialsBank();
                     log.info(logPrefix + " - hooked into Essentials Economy for " + this.plugin.getDescription().getFullName());
