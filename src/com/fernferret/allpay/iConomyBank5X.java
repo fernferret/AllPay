@@ -39,4 +39,10 @@ public class iConomyBank5X extends GenericBank {
     protected double getMoneyBalance(Player p) {
         return iConomy.getAccount(p.getName()).getHoldings().balance();
     }
+
+    @Override
+    protected void giveMoney(Player player, double amount) {
+        iConomy.getAccount(player.getName()).getHoldings().add(amount);
+        showReceipt(player, (amount * -1), -1);
+    }
 }
