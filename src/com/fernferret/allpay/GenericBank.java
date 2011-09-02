@@ -1,5 +1,6 @@
 package com.fernferret.allpay;
 
+import java.util.HashMap;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,8 +19,7 @@ public abstract class GenericBank {
      */
     protected final boolean hasItem(Player player, double amount, int type, String message) {
         // TODO: Make this inventory
-        ItemStack item = player.getItemInHand();
-        boolean hasEnough = (item.getTypeId() == type && item.getAmount() >= amount);
+        boolean hasEnough = player.getInventory().contains(type, (int)amount);
         if (!hasEnough) {
             userIsTooPoor(player, type, message);
         }
@@ -69,13 +69,21 @@ public abstract class GenericBank {
     }
 
     protected final void payItem(Player player, double amount, int type) {
-        ItemStack item = player.getItemInHand();
-        int finalamount = item.getAmount() - (int) amount;
-
-        if (finalamount > 0) {
-            player.getItemInHand().setAmount(finalamount);
-        } else {
-            player.getInventory().remove(item);
+        int removed = 0;
+        HashMap<Integer, ItemStack> items = (HashMap<Integer, ItemStack>) player.getInventory().all(type);
+        for (int i : items.keySet()) {
+            if (removed >= amount) {
+                break;
+            }
+            int diff = (int) (amount - removed);
+            int amt = player.getInventory().getItem(i).getAmount();
+            if (amt - diff > 0) {
+                player.getInventory().getItem(i).setAmount(amt - diff);
+                break;
+            } else {
+                removed += amt;
+                player.getInventory().clear(i);
+            }
         }
         showReceipt(player, amount, type);
     }
