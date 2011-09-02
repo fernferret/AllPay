@@ -41,5 +41,11 @@ public class BOSEconomyBank extends GenericBank {
     protected double getMoneyBalance(Player p) {
         return this.plugin.getPlayerMoney(p.getName());
     }
-	
+
+    @Override
+    protected void giveMoney(Player player, double amount) {
+        this.plugin.addPlayerMoney(player.getName(), (int)amount, true);
+        showReceipt(player, (amount * -1), -1);
+    }
+
 }

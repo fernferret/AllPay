@@ -54,5 +54,17 @@ public class EssentialsBank extends GenericBank {
             return 0;
         }
     }
-	
+
+    @Override
+    public void giveMoney(Player player, double amount) {
+        try {
+            Economy.add(player.getName(), amount);
+            showReceipt(player, (amount * -1), -1);
+        } catch (UserDoesNotExistException e) {
+            showError(player, "You don't have an account!");
+        } catch (NoLoanPermittedException e) {
+            showError(player, "Your bank doesn't allow loans!");
+        }
+    }
+
 }

@@ -39,4 +39,11 @@ public class MultiCurrencyBank extends GenericBank {
     protected double getMoneyBalance(Player p) {
         return CurrencyList.getValue(((String) CurrencyList.maxCurrency(p.getName())[0]), p.getName());
     }
+
+    @Override
+    protected void giveMoney(Player player, double amount) {
+        CurrencyList.add(player.getName(), amount);
+        showReceipt(player, (amount * -1), -1);
+    }
+
 }

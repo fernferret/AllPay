@@ -68,13 +68,6 @@ public abstract class GenericBank {
         return hasEnough(player, amount, type, null);
     }
 
-    /**
-     * Take the required items/money from the player.
-     * 
-     * @param player The player to take from
-     * @param amount How much should we take
-     * @param type What should we take? (-1 for money, item id for item)
-     */
     protected final void payItem(Player player, double amount, int type) {
         ItemStack item = player.getItemInHand();
         int finalamount = item.getAmount() - (int) amount;
@@ -89,12 +82,42 @@ public abstract class GenericBank {
 
     protected abstract void payMoney(Player player, double amount);
 
+    /**
+     * Take the required items/money from the player.
+     *
+     * @param player The player to take from
+     * @param amount How much should we take
+     * @param type What should we take? (-1 for money, item id for item)
+     */
     public final void pay(Player player, double amount, int type) {
         if (type == -1) {
             payMoney(player, amount);
         } else {
             payItem(player, amount, type);
         }
+    }
+
+    /**
+     * Give the specified items/money to the player
+     *
+     * @param player the player to add to
+     * @param amount the amount to give
+     * @param type the type of currency, -1 for money, itemID otherwise
+     */
+    public final void give(Player player, double amount, int type) {
+        if (type == -1) {
+            giveMoney(player, amount);
+        } else {
+            giveItem(player, amount, type);
+        }
+    }
+
+    protected abstract void giveMoney(Player player, double amount);
+
+    protected final void giveItem(Player player, double amount, int type) {
+        ItemStack item = new ItemStack(type, (int) amount);
+        player.getInventory().addItem(item);
+        showReceipt(player, (amount * -1), type);
     }
 
     /**
@@ -155,8 +178,11 @@ public abstract class GenericBank {
      * @param item The item the user was charged for a wolf (-1 is money)
      */
     protected void showReceipt(Player player, double price, int item) {
-        if (price > 0)
+        if (price > 0) {
             player.sendMessage(ChatColor.DARK_GREEN + this.prefix + ChatColor.WHITE + "You have been charged " + ChatColor.GREEN + getFormattedAmount(player, price, item));
+        } else if (price < 0) {
+            player.sendMessage(ChatColor.DARK_GREEN + this.prefix + getFormattedAmount(player, (price * -1), item) + ChatColor.WHITE + " has been added to your account.");
+        }
     }
 
     protected void showError(Player player, String message) {
