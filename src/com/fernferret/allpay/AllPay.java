@@ -14,8 +14,8 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
  * @author Eric Stokes
  */
 public class AllPay {
-    private static final String version = "1.0.3";
-    protected static final String logPrefix = "[AllPay] - Version " + version;
+    private final String version = "1.0.4";
+    protected final String logPrefix = "[AllPay] - Version " + version;
 
     protected static final Logger log = Logger.getLogger("Minecraft");
     private String prefix;
@@ -50,6 +50,10 @@ public class AllPay {
      */
     public GenericBank getEconPlugin() {
         return this.bank;
+    }
+    
+    public String getVersion() {
+        return this.version;
     }
 
     private void loadEssentialsEconomoy() {
