@@ -16,14 +16,14 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
  * @author Eric Stokes
  */
 public class AllPay {
-    private final double version = 2.1;
+    private final double version = 3;
     protected final String logPrefix = "[AllPay] - Version " + version;
 
     protected static final Logger log = Logger.getLogger("Minecraft");
     private String prefix;
     private Plugin plugin;
     private GenericBank bank;
-    public final static String[] validEconPlugins = { "Essentials", "RealShop", "BOSEconomy", "iConomy" };
+    public final static String[] validEconPlugins = { "Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency" };
     public static List<String> pluginsThatUseUs = new ArrayList<String>();
 
     public AllPay(Plugin plugin, String prefix) {
@@ -55,7 +55,7 @@ public class AllPay {
     public GenericBank getEconPlugin() {
         return this.bank;
     }
-    
+
     public double getVersion() {
         return this.version;
     }

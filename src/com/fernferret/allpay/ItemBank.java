@@ -1,7 +1,6 @@
 package com.fernferret.allpay;
 
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * Special bank class that handles items. If any money (item id = -1) comes in here, it will always return true and never take away This class should be the default bank
