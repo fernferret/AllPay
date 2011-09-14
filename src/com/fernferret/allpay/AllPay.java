@@ -1,5 +1,7 @@
 package com.fernferret.allpay;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.plugin.Plugin;
@@ -22,10 +24,12 @@ public class AllPay {
     private Plugin plugin;
     private GenericBank bank;
     public final static String[] validEconPlugins = { "Essentials", "RealShop", "BOSEconomy", "iConomy" };
+    public static List<String> pluginsThatUseUs = new ArrayList<String>();
 
     public AllPay(Plugin plugin, String prefix) {
         this.plugin = plugin;
         this.prefix = prefix;
+        pluginsThatUseUs.add(this.plugin.getDescription().getName());
     }
 
     /**
