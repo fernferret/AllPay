@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class GenericBank {
+    private boolean receipts = true;
     private String prefix;
 
     /**
@@ -186,10 +187,12 @@ public abstract class GenericBank {
      * @param item The item the user was charged for a wolf (-1 is money)
      */
     protected void showReceipt(Player player, double price, int item) {
-        if (price > 0) {
-            player.sendMessage(ChatColor.DARK_GREEN + this.prefix + ChatColor.WHITE + "You have been charged " + ChatColor.GREEN + getFormattedAmount(player, price, item));
-        } else if (price < 0) {
-            player.sendMessage(ChatColor.DARK_GREEN + this.prefix + getFormattedAmount(player, (price * -1), item) + ChatColor.WHITE + " has been added to your account.");
+        if (receipts) {
+            if (price > 0) {
+                player.sendMessage(ChatColor.DARK_GREEN + this.prefix + ChatColor.WHITE + "You have been charged " + ChatColor.GREEN + getFormattedAmount(player, price, item));
+            } else if (price < 0) {
+                player.sendMessage(ChatColor.DARK_GREEN + this.prefix + getFormattedAmount(player, (price * -1), item) + ChatColor.WHITE + " has been added to your account.");
+            }
         }
     }
 
@@ -239,5 +242,9 @@ public abstract class GenericBank {
             return 0;
         }
         return item.getAmount();
+    }
+
+    public void toggleReceipts(boolean val) {
+        this.receipts = val;
     }
 }
