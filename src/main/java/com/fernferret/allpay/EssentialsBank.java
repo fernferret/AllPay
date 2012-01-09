@@ -33,7 +33,7 @@ public class EssentialsBank extends GenericBank {
 	}
 
 	@Override
-	public void payMoney(Player player, double amount) {
+	public void takeMoney(Player player, double amount) {
 		try {
 			Economy.subtract(player.getName(), amount);
 			showReceipt(player, amount, -1);
@@ -66,5 +66,5 @@ public class EssentialsBank extends GenericBank {
             showError(player, "Your bank doesn't allow loans!");
         }
     }
-
+    
 }
