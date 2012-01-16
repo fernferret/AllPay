@@ -25,7 +25,7 @@ public class MultiCurrencyBank extends GenericBank {
     }
 
     @Override
-    protected void payMoney(Player player, double amount) {
+    protected void takeMoney(Player player, double amount) {
         CurrencyList.subtract(player.getName(), amount);
         showReceipt(player, amount, -1);
     }
