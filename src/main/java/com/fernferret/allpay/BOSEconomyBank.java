@@ -26,7 +26,7 @@ public class BOSEconomyBank extends GenericBank {
 	}
 	
 	@Override
-	public void payMoney(Player player, double amount) {
+	public void takeMoney(Player player, double amount) {
 		int negativePrice = (int) (-1 * Math.abs(amount));
 		this.plugin.addPlayerMoney(player.getName(), negativePrice, true);
 		showReceipt(player, amount, -1);
@@ -46,6 +46,15 @@ public class BOSEconomyBank extends GenericBank {
     protected void giveMoney(Player player, double amount) {
         this.plugin.addPlayerMoney(player.getName(), (int)amount, true);
         showReceipt(player, (amount * -1), -1);
+    }
+    
+    @Override
+    protected void transferMoney(Player from, Player to, double amount) {
+        if (!hasMoney(from, amount, "")) {
+            return;
+        }
+        takeMoney(from, amount);
+        giveMoney(to, amount);
     }
 
 }
