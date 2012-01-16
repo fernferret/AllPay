@@ -23,7 +23,7 @@ public class ItemBank extends GenericBank {
 	}
 	
 	@Override
-	protected void payMoney(Player player, double amount) {
+	protected void takeMoney(Player player, double amount) {
 		// No need to take anything away here, someone needs to configure a bank differently if they're getting here...
 	}
 	

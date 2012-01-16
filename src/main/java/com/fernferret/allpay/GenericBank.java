@@ -69,7 +69,7 @@ public abstract class GenericBank {
         return hasEnough(player, amount, type, null);
     }
 
-    protected final void payItem(Player player, double amount, int type) {
+    protected final void takeItem(Player player, double amount, int type) {
         int removed = 0;
         HashMap<Integer, ItemStack> items = (HashMap<Integer, ItemStack>) player.getInventory().all(type);
         for (int i : items.keySet()) {
@@ -89,7 +89,7 @@ public abstract class GenericBank {
         showReceipt(player, amount, type);
     }
 
-    protected abstract void payMoney(Player player, double amount);
+    protected abstract void takeMoney(Player player, double amount);
 
     /**
      * Take the required items/money from the player.
@@ -98,12 +98,24 @@ public abstract class GenericBank {
      * @param amount How much should we take
      * @param type What should we take? (-1 for money, item id for item)
      */
-    public final void pay(Player player, double amount, int type) {
+    public final void take(Player player, double amount, int type) {
         if (type == -1) {
-            payMoney(player, amount);
+            takeMoney(player, amount);
         } else {
-            payItem(player, amount, type);
+            takeItem(player, amount, type);
         }
+    }
+
+    /**
+     * Take the required items/money from the player.
+     *
+     * @param player The player to take from
+     * @param amount How much should we take
+     * @param type What should we take? (-1 for money, item id for item)
+     * @deprecated since v3.1
+     */
+    public final void pay(Player player, double amount, int type) {
+        take(player, amount, type);
     }
 
     /**
@@ -129,6 +141,38 @@ public abstract class GenericBank {
         showReceipt(player, (amount * -1), type);
     }
 
+    /**
+     * Transfers a specified amount of the type (-1 for currency, otherwise an item)
+     * to the specified player, from the specified player
+     * @param from The player to take from
+     * @param to The player to give to
+     * @param amount The amount to take
+     * @param type The item id (or -1, for currency)
+     */
+    public final void transfer(Player from, Player to, double amount, int type) {
+        if (type == -1) {
+            transferMoney(from, to, amount);
+        } else {
+            transferItem(from, to, amount, type);
+        }
+    }
+    
+    protected void transferMoney(Player from, Player to, double amount) {
+        if (!hasMoney(from, amount, "")) {
+            return;
+        }
+        takeMoney(from, amount);
+        giveMoney(to, amount);
+    }
+    
+    protected final void transferItem(Player from, Player to, double amount, int type) {
+        if (!hasEnough(from, amount, type)) {
+            return;
+        }
+        takeItem(from, amount, type);
+        giveItem(to, amount, type);
+    }
+    
     /**
      * Returns a formatted string of the given amount and type. If type is -1, will return a bank specific string like: "5 Dollars" If type is != -1 will return an item string like: "1 Diamond"
      * 

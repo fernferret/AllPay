@@ -33,7 +33,7 @@ public class iConomyBank6X extends GenericBank {
     }
 
     @Override
-    protected void payMoney(Player player, double amount) {
+    protected void takeMoney(Player player, double amount) {
         this.accounts.get(player.getName()).getHoldings().subtract(amount);
         showReceipt(player, amount, -1);
     }
@@ -53,4 +53,5 @@ public class iConomyBank6X extends GenericBank {
         this.accounts.get(player.getName()).getHoldings().add(amount);
         showReceipt(player, (amount * -1), -1);
     }
+
 }
