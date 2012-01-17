@@ -25,7 +25,7 @@ public class EconXPBank extends GenericBank {
 	}
 
 	@Override
-	public void payMoney(Player player, double amount) {
+	public void takeMoney(Player player, double amount) {
 		this.plugin.removeExp(player, (int) amount);
 		showReceipt(player, amount, -1);
 	}
