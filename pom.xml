@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fernferret.allpay</groupId>
     <artifactId>AllPay</artifactId>
-    <version>3</version>
+    <version>4</version>
     <name>AllPay</name>
     <description>A payment library for Bukkit.</description>
     <properties>
@@ -13,7 +13,7 @@
     <repositories>
         <repository>
             <id>OnARandomBox</id>
-            <url>http://repo.onarandombox.com/artifactory/repo</url>
+            <url>http://repo.onarandombox.com/content/groups/public</url>
         </repository>
     </repositories>
     <build>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.0.0-R1-SNAPSHOT</version>
+            <version>1.1-R1-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -108,6 +108,14 @@
             <version>0.09</version>
             <type>jar</type>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+          <groupId>ca.agnate</groupId>
+          <artifactId>EconXP</artifactId>
+          <version>1.0.0</version>
+          <type>jar</type>
+          <scope>compile</scope>
         </dependency>
         <!-- End of Economy Dependencies -->
     </dependencies>
