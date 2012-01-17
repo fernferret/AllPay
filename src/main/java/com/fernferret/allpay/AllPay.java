@@ -1,5 +1,6 @@
 package com.fernferret.allpay;
 
+import ca.agnate.EconXP.EconXP;
 import cosine.boseconomy.BOSEconomy;
 import fr.crafter.tickleman.RealEconomy.RealEconomy;
 import fr.crafter.tickleman.RealPlugin.RealPlugin;
@@ -23,7 +24,8 @@ public class AllPay {
     private String prefix;
     private Plugin plugin;
     private GenericBank bank;
-    public final static String[] validEconPlugins = {"Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency"};
+    public final static String[] validEconPlugins =
+            {"Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency", "EconXP"};
     public static List<String> pluginsThatUseUs = new ArrayList<String>();
 
     public AllPay(Plugin plugin, String prefix) {
@@ -44,6 +46,7 @@ public class AllPay {
         loadRealShopEconomy();
         loadEssentialsEconomoy();
         loadDefaultItemEconomy();
+        loadEconXPEconomy();
         this.bank.setPrefix(this.prefix);
         return this.bank;
     }
@@ -92,10 +95,20 @@ public class AllPay {
             if (boseconPlugin != null) {
 
                 this.bank = new BOSEconomyBank((BOSEconomy) boseconPlugin);
-                log.info(logPrefix + " - hooked into BOSEconomy " + this.plugin.getDescription().getFullName());
+                log.info(logPrefix + " - hooked into BOSEconomy for " + this.plugin.getDescription().getFullName());
             }
         }
     }
+
+    private void loadEconXPEconomy() {
+            if (this.bank == null && !(this.bank instanceof EssentialsBank)) {
+                Plugin econXPPlugin = this.plugin.getServer().getPluginManager().getPlugin("EconXP");
+                if (econXPPlugin != null) {
+                    this.bank = new EconXPBank((EconXP) econXPPlugin);
+                    log.info(logPrefix + " - hooked into EconXP for " + this.plugin.getDescription().getFullName());
+                }
+            }
+        }
 
     private void loadDefaultItemEconomy() {
         if (this.bank == null) {
