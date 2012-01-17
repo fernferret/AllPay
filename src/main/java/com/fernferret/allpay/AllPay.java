@@ -12,11 +12,11 @@ import fr.crafter.tickleman.RealPlugin.RealPlugin;
 
 /**
  * AllPay is a nifty little payment wrapper class that takes the heavy lifting out of integrating payments into your plugin!
- * 
+ *
  * @author Eric Stokes
  */
 public class AllPay {
-    private final double version = 4;
+    private final double version = 5;
     protected final String logPrefix = "[AllPay] - Version " + version;
 
     protected static final Logger log = Logger.getLogger("Minecraft");
@@ -34,7 +34,7 @@ public class AllPay {
 
     /**
      * Load an econ plugin. Plugins are loaded in this order: iConomy, BOSEconomy, RealShop, Essentials and simple items
-     * 
+     *
      * @return The GenericBank object to process payments.
      */
     public GenericBank loadEconPlugin() {
@@ -49,7 +49,7 @@ public class AllPay {
 
     /**
      * Returns the AllPay GenericBank object that you can issue calls to and from
-     * 
+     *
      * @return The GenericBank object to process payments.
      */
     public GenericBank getEconPlugin() {

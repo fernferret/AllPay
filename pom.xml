@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fernferret.allpay</groupId>
     <artifactId>AllPay</artifactId>
-    <version>4</version>
+    <version>5</version>
     <name>AllPay</name>
     <description>A payment library for Bukkit.</description>
     <properties>
