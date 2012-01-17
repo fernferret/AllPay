@@ -45,8 +45,8 @@ public class AllPay {
         loadBOSEconomy();
         loadRealShopEconomy();
         loadEssentialsEconomoy();
-        loadDefaultItemEconomy();
         loadEconXPEconomy();
+        loadDefaultItemEconomy();
         this.bank.setPrefix(this.prefix);
         return this.bank;
     }
