@@ -1,10 +1,11 @@
 package com.fernferret.allpay;
 
-import java.util.HashMap;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.HashMap;
 
 public abstract class GenericBank {
     private boolean receipts = true;
@@ -15,12 +16,13 @@ public abstract class GenericBank {
      *
      * @param player Check this player's item in hand.
      * @param amount How many items should we see if they have?
-     * @param type A valid item id. This will check to see if they have the item(s) in their hand.
+     * @param type   A valid item id. This will check to see if they have the item(s) in their hand.
+     *
      * @return true if they have enough items false if not.
      */
     protected final boolean hasItem(Player player, double amount, int type, String message) {
         // TODO: Make this inventory
-        boolean hasEnough = player.getInventory().contains(type, (int)amount);
+        boolean hasEnough = player.getInventory().contains(type, (int) amount);
         if (!hasEnough) {
             userIsTooPoor(player, type, message);
         }
@@ -30,20 +32,24 @@ public abstract class GenericBank {
     /**
      * Check to ensure the player has enough money
      *
-     * @param player Check this player's bank/pocket for money.
-     * @param money How much money should we see if they have?
+     * @param player  Check this player's bank/pocket for money.
+     * @param money   How much money should we see if they have?
      * @param message The error message to display after the string. NULL will be passed if one is not required.
+     *
      * @return true if they have enough, false if not
      */
     protected abstract boolean hasMoney(Player player, double money, String message);
 
     /**
-     * Check to ensure the player has enough money or items. This method is intended if you want to accept items or money
+     * Check to ensure the player has enough money or items. This method is intended if you want to accept items or
+     * money
      *
-     * @param player Check this player's bank/currently held item for money/items.
-     * @param amount How much money or how many items should we see if they have?
-     * @param type -1 for money, any other valid item id for items. This will check to see if they have the items in their hand.
+     * @param player  Check this player's bank/currently held item for money/items.
+     * @param amount  How much money or how many items should we see if they have?
+     * @param type    -1 for money, any other valid item id for items. This will check to see if they have the items in
+     *                their hand.
      * @param message The error message to display after the string. NULL should be passed if one is not required.
+     *
      * @return true if they have enough money/items false if not.
      */
     public final boolean hasEnough(Player player, double amount, int type, String message) {
@@ -62,7 +68,9 @@ public abstract class GenericBank {
      *
      * @param player Check this player's bank/currently held item for money/items.
      * @param amount How much money or how many items should we see if they have?
-     * @param type -1 for money, any other valid item id for items. This will check to see if they have the items in their hand.
+     * @param type   -1 for money, any other valid item id for items. This will check to see if they have the items in
+     *               their hand.
+     *
      * @return true if they have enough money/items false if not.
      */
     public final boolean hasEnough(Player player, double amount, int type) {
@@ -96,7 +104,7 @@ public abstract class GenericBank {
      *
      * @param player The player to take from
      * @param amount How much should we take
-     * @param type What should we take? (-1 for money, item id for item)
+     * @param type   What should we take? (-1 for money, item id for item)
      */
     public final void take(Player player, double amount, int type) {
         if (type == -1) {
@@ -112,7 +120,8 @@ public abstract class GenericBank {
      *
      * @param player The player to take from
      * @param amount How much should we take
-     * @param type What should we take? (-1 for money, item id for item)
+     * @param type   What should we take? (-1 for money, item id for item)
+     *
      * @deprecated since v3.1
      */
     @Deprecated
@@ -125,7 +134,7 @@ public abstract class GenericBank {
      *
      * @param player the player to add to
      * @param amount the amount to give
-     * @param type the type of currency, -1 for money, itemID otherwise
+     * @param type   the type of currency, -1 for money, itemID otherwise
      */
     public final void give(Player player, double amount, int type) {
         if (type == -1) {
@@ -146,10 +155,11 @@ public abstract class GenericBank {
     /**
      * Transfers a specified amount of the type (-1 for currency, otherwise an item)
      * to the specified player, from the specified player
-     * @param from The player to take from
-     * @param to The player to give to
+     *
+     * @param from   The player to take from
+     * @param to     The player to give to
      * @param amount The amount to take
-     * @param type The item id (or -1, for currency)
+     * @param type   The item id (or -1, for currency)
      */
     public final void transfer(Player from, Player to, double amount, int type) {
         if (type == -1) {
@@ -176,10 +186,12 @@ public abstract class GenericBank {
     }
 
     /**
-     * Returns a formatted string of the given amount and type. If type is -1, will return a bank specific string like: "5 Dollars" If type is != -1 will return an item string like: "1 Diamond"
+     * Returns a formatted string of the given amount and type. If type is -1, will return a bank specific string like:
+     * "5 Dollars" If type is != -1 will return an item string like: "1 Diamond"
      *
      * @param amount The number of money/items
-     * @param type Money(-1) or item
+     * @param type   Money(-1) or item
+     *
      * @return A formatted string of the given amount and type
      */
     public final String getFormattedItemAmount(double amount, int type) {
@@ -192,10 +204,12 @@ public abstract class GenericBank {
     }
 
     /**
-     * This method is provided to enable compatability with plugins that force us to have a player to determine the currency By default it just calles getFormattedMoneyAmount
+     * This method is provided to enable compatability with plugins that force us to have a player to determine the
+     * currency By default it just calles getFormattedMoneyAmount
      *
      * @param amount The amount to format
      * @param player The player whom we are talking about
+     *
      * @return A formatted amount, like $5
      */
     protected abstract String getFormattedMoneyAmount(Player player, double amount);
@@ -209,11 +223,14 @@ public abstract class GenericBank {
     }
 
     /**
-     * This method is called if a user does not have enough money or items. The message parameter allows you to customize what the user does not have enough money for. The format follows: "Sorry but you do not have the required [funds|items] {message}" You can't touch this. My my my...
+     * This method is called if a user does not have enough money or items. The message parameter allows you to
+     * customize what the user does not have enough money for. The format follows: "Sorry but you do not have the
+     * required [funds|items] {message}" You can't touch this. My my my...
      *
      * @param player
      * @param item
-     * @param message This message will appear after the sentence that follows: "{prefix}Sorry but you do not have the required [funds|items] {message}"
+     * @param message This message will appear after the sentence that follows: "{prefix}Sorry but you do not have the
+     *                required [funds|items] {message}"
      */
     protected final void userIsTooPoor(Player player, int item, String message) {
         String type = (item == -1) ? "funds" : "items";
@@ -226,11 +243,12 @@ public abstract class GenericBank {
     }
 
     /**
-     * Prints a receipt to the user, this should only be called if the econ plugin does not already output when money is taken (Essentials does this) Yo, I told ya, Can't touch this.
+     * Prints a receipt to the user, this should only be called if the econ plugin does not already output when money is
+     * taken (Essentials does this) Yo, I told ya, Can't touch this.
      *
      * @param player The player to send the receipt to
-     * @param price The price the user was charged for a wolf
-     * @param item The item the user was charged for a wolf (-1 is money)
+     * @param price  The price the user was charged for a wolf
+     * @param item   The item the user was charged for a wolf (-1 is money)
      */
     protected void showReceipt(Player player, double price, int item) {
         if (receipts) {
@@ -274,17 +292,18 @@ public abstract class GenericBank {
     }
 
     public double getBalance(Player p, int itemId) {
-        if(itemId == -1) {
+        if (itemId == -1) {
             return getMoneyBalance(p);
         }
         return getItemAnount(p, itemId);
     }
+
     protected abstract double getMoneyBalance(Player p);
 
     protected final int getItemAnount(Player player, int type) {
         // TODO: Make this inventory
         ItemStack item = player.getItemInHand();
-        if(item.getTypeId() != type) {
+        if (item.getTypeId() != type) {
             return 0;
         }
         return item.getAmount();

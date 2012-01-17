@@ -1,12 +1,11 @@
 package com.fernferret.allpay;
 
-import org.bukkit.entity.Player;
-
 import com.iConomy.iConomy;
+import org.bukkit.entity.Player;
 
 /**
  * Adapter class for iConomy 5
- * 
+ *
  * @author Eric Stokes
  */
 public class iConomyBank5X extends GenericBank {
@@ -45,5 +44,5 @@ public class iConomyBank5X extends GenericBank {
         iConomy.getAccount(player.getName()).getHoldings().add(amount);
         showReceipt(player, (amount * -1), -1);
     }
-    
+
 }

@@ -1,12 +1,11 @@
 package com.fernferret.allpay;
 
 import me.ashtheking.currency.CurrencyList;
-
 import org.bukkit.entity.Player;
 
 /**
  * Adapter class for MultiCurrency
- * 
+ *
  * @author Eric Stokes
  */
 public class MultiCurrencyBank extends GenericBank {

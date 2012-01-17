@@ -1,13 +1,12 @@
 package com.fernferret.allpay;
 
-import org.bukkit.entity.Player;
-
 import com.iCo6.iConomy;
 import com.iCo6.system.Accounts;
+import org.bukkit.entity.Player;
 
 /**
  * Adapter class for iConomy 6
- * 
+ *
  * @author Eric Stokes
  */
 public class iConomyBank6X extends GenericBank {

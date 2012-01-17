@@ -111,11 +111,11 @@
         </dependency>
 
         <dependency>
-          <groupId>ca.agnate</groupId>
-          <artifactId>EconXP</artifactId>
-          <version>1.0.0</version>
-          <type>jar</type>
-          <scope>compile</scope>
+            <groupId>ca.agnate</groupId>
+            <artifactId>EconXP</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
         </dependency>
         <!-- End of Economy Dependencies -->
     </dependencies>

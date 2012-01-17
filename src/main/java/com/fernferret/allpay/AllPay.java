@@ -1,17 +1,17 @@
 package com.fernferret.allpay;
 
+import cosine.boseconomy.BOSEconomy;
+import fr.crafter.tickleman.RealEconomy.RealEconomy;
+import fr.crafter.tickleman.RealPlugin.RealPlugin;
+import org.bukkit.plugin.Plugin;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.bukkit.plugin.Plugin;
-
-import cosine.boseconomy.BOSEconomy;
-import fr.crafter.tickleman.RealEconomy.RealEconomy;
-import fr.crafter.tickleman.RealPlugin.RealPlugin;
-
 /**
- * AllPay is a nifty little payment wrapper class that takes the heavy lifting out of integrating payments into your plugin!
+ * AllPay is a nifty little payment wrapper class that takes the heavy lifting out of integrating payments into your
+ * plugin!
  *
  * @author Eric Stokes
  */
@@ -23,7 +23,7 @@ public class AllPay {
     private String prefix;
     private Plugin plugin;
     private GenericBank bank;
-    public final static String[] validEconPlugins = { "Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency" };
+    public final static String[] validEconPlugins = {"Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency"};
     public static List<String> pluginsThatUseUs = new ArrayList<String>();
 
     public AllPay(Plugin plugin, String prefix) {
@@ -33,7 +33,8 @@ public class AllPay {
     }
 
     /**
-     * Load an econ plugin. Plugins are loaded in this order: iConomy, BOSEconomy, RealShop, Essentials and simple items
+     * Load an econ plugin. Plugins are loaded in this order: iConomy, BOSEconomy, RealShop, Essentials and simple
+     * items
      *
      * @return The GenericBank object to process payments.
      */

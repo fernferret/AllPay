@@ -1,11 +1,11 @@
 package com.fernferret.allpay;
 
-import org.bukkit.entity.Player;
 import com.nijiko.coelho.iConomy.iConomy;
+import org.bukkit.entity.Player;
 
 /**
  * Adapter class for iConomy 4
- * 
+ *
  * @author Eric Stokes
  */
 public class iConomyBank4X extends GenericBank {
@@ -28,7 +28,7 @@ public class iConomyBank4X extends GenericBank {
         iConomy.getBank().getAccount(player.getName()).subtract(amount);
         showReceipt(player, amount, -1);
     }
-    
+
 
     @Override
     protected String getFormattedMoneyAmount(Player player, double amount) {
@@ -45,5 +45,5 @@ public class iConomyBank4X extends GenericBank {
         iConomy.getBank().getAccount(player.getName()).add(amount);
         showReceipt(player, (amount * -1), -1);
     }
-    
+
 }
