@@ -119,4 +119,10 @@
         </dependency>
         <!-- End of Economy Dependencies -->
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>OnARandomBox</id>
+            <url>http://repo.onarandombox.com/content/repositories/bukkit-thirdparty</url>
+        </repository>
+    </distributionManagement>
 </project>
