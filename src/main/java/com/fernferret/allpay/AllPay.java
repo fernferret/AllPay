@@ -39,11 +39,11 @@ public class AllPay {
             props.load(this.getClass().getResourceAsStream("/allpay.properties"));
             version = Integer.parseInt(props.getProperty("version", "-1"));
         } catch (NumberFormatException e) {
-            this.logBadAllPay(plugin, "111");
+            this.logBadAllPay(plugin);
         } catch (FileNotFoundException e) {
-            this.logBadAllPay(plugin, "222");
+            this.logBadAllPay(plugin);
         } catch (IOException e) {
-            this.logBadAllPay(plugin, "333");
+            this.logBadAllPay(plugin);
         }
 
         this.plugin = plugin;
@@ -63,11 +63,10 @@ public class AllPay {
         return validEconPlugins;
     }
 
-    private void logBadAllPay(Plugin plugin, String code) {
+    private void logBadAllPay(Plugin plugin) {
         plugin.getLogger().log(Level.SEVERE,
                         String.format("AllPay looks corrupted, meaning this plugin (%s) is corrupted too!",
                         plugin.getDescription().getName()));
-        plugin.getLogger().log(Level.SEVERE, code);
     }
 
     /**
