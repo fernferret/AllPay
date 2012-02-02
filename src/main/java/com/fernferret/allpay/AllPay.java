@@ -6,8 +6,13 @@ import fr.crafter.tickleman.RealEconomy.RealEconomy;
 import fr.crafter.tickleman.RealPlugin.RealPlugin;
 import org.bukkit.plugin.Plugin;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -17,21 +22,52 @@ import java.util.logging.Logger;
  * @author Eric Stokes
  */
 public class AllPay {
-    private final double version = 5;
+    private static double version;
+    private Properties props = new Properties();
     protected final String logPrefix = "[AllPay] - Version " + version;
 
     protected static final Logger log = Logger.getLogger("Minecraft");
     private String prefix;
     private Plugin plugin;
     private GenericBank bank;
-    public final static String[] validEconPlugins =
+    private final static String[] validEconPlugins =
             {"Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency", "EconXP"};
-    public static List<String> pluginsThatUseUs = new ArrayList<String>();
+    private static List<String> pluginsThatUseUs = new ArrayList<String>();
 
     public AllPay(Plugin plugin, String prefix) {
+        try {
+            props.load(this.getClass().getResourceAsStream("/allpay.properties"));
+            version = Integer.parseInt(props.getProperty("version", "-1"));
+        } catch (NumberFormatException e) {
+            this.logBadAllPay(plugin, "111");
+        } catch (FileNotFoundException e) {
+            this.logBadAllPay(plugin, "222");
+        } catch (IOException e) {
+            this.logBadAllPay(plugin, "333");
+        }
+
         this.plugin = plugin;
         this.prefix = prefix;
         pluginsThatUseUs.add(this.plugin.getDescription().getName());
+    }
+
+    /**
+     * This should not be required with the new shade plugin.
+     * @return
+     */
+    public List<String> getPluginsThatUseUs() {
+        return pluginsThatUseUs;
+    }
+
+    public static String[] getValidEconPlugins() {
+        return validEconPlugins;
+    }
+
+    private void logBadAllPay(Plugin plugin, String code) {
+        plugin.getLogger().log(Level.SEVERE,
+                        String.format("AllPay looks corrupted, meaning this plugin (%s) is corrupted too!",
+                        plugin.getDescription().getName()));
+        plugin.getLogger().log(Level.SEVERE, code);
     }
 
     /**
@@ -41,12 +77,12 @@ public class AllPay {
      * @return The GenericBank object to process payments.
      */
     public GenericBank loadEconPlugin() {
-        loadiConomy(); // Supports both 4.x and 5.x
-        loadBOSEconomy();
-        loadRealShopEconomy();
-        loadEssentialsEconomoy();
-        loadEconXPEconomy();
-        loadDefaultItemEconomy();
+        this.loadiConomy(); // Supports both 4.x, 5.x and 6.x
+        this.loadBOSEconomy();
+        this.loadRealShopEconomy();
+        this.loadEssentialsEconomoy();
+        this.loadEconXPEconomy();
+        this.loadDefaultItemEconomy();
         this.bank.setPrefix(this.prefix);
         return this.bank;
     }

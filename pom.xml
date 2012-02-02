@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fernferret.allpay</groupId>
     <artifactId>AllPay</artifactId>
-    <version>5</version>
+    <version>6</version>
     <name>AllPay</name>
     <description>A payment library for Bukkit.</description>
     <properties>
@@ -15,9 +15,13 @@
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
         </repository>
+        <repository>
+            <id>Official Bukkit</id>
+            <url>http://repo.bukkit.org/content/repositories/public</url>
+        </repository>
     </repositories>
     <build>
-        <defaultGoal>clean package</defaultGoal>
+        <defaultGoal>clean install</defaultGoal>
         <plugins>
             <!-- Compiler -->
             <plugin>
@@ -42,6 +46,12 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
     <dependencies>
         <!-- Bukkit Dependency -->
@@ -53,6 +63,7 @@
             <scope>compile</scope>
         </dependency>
         <!-- Bukkit Dependency -->
+
         <!-- Start of Economy Dependencies -->
         <dependency>
             <groupId>cosine.boseconomy</groupId>
