@@ -6,9 +6,7 @@ import com.earth2me.essentials.api.UserDoesNotExistException;
 import org.bukkit.entity.Player;
 
 /**
- * Essentials class is on hold until they give me access to the currency string
- *
- * @author Eric Stokes
+ * The bank implementation for Essentials Economy.
  */
 public class EssentialsBank extends GenericBank {
 

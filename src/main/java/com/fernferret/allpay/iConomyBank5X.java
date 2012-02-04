@@ -4,17 +4,22 @@ import com.iConomy.iConomy;
 import org.bukkit.entity.Player;
 
 /**
- * Adapter class for iConomy 5
- *
- * @author Eric Stokes
+ * The bank implementation for iConomy 5.
  */
-public class iConomyBank5X extends GenericBank {
+public class iConomyBank5X extends GenericBank { // SUPPRESS CHECKSTYLE: TypeName
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getEconUsed() {
         return "iConomy 5";
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected boolean hasMoney(Player player, double money, String message) {
         boolean result = iConomy.getAccount(player.getName()).getHoldings().hasEnough(money);
         if (!result) {
@@ -23,26 +28,37 @@ public class iConomyBank5X extends GenericBank {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void takeMoney(Player player, double amount) {
         iConomy.getAccount(player.getName()).getHoldings().subtract(amount);
         showReceipt(player, amount, -1);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getFormattedMoneyAmount(Player player, double amount) {
         return iConomy.format(amount);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected double getMoneyBalance(Player p) {
         return iConomy.getAccount(p.getName()).getHoldings().balance();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void giveMoney(Player player, double amount) {
         iConomy.getAccount(player.getName()).getHoldings().add(amount);
         showReceipt(player, (amount * -1), -1);
     }
-
 }

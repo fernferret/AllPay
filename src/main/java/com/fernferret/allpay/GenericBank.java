@@ -7,21 +7,32 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
+/**
+ * This is a very simple bank interface.
+ * <p>
+ * This is abstract to allow some checks to be done for all banks.
+ */
 public abstract class GenericBank {
     private boolean receipts = true;
     private String prefix;
 
     /**
      * Check to ensure the player has enough items for a transaction.
+     * <p>
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
      *
-     * @param player Check this player's item in hand.
-     * @param amount How many items should we see if they have?
-     * @param type   A valid item id. This will check to see if they have the item(s) in their hand.
+     * @param player  Check this player's item in hand.
+     * @param amount  How many items should we see if they have?
+     * @param type    A valid item id. This will check to see if they have the item(s) in their hand.
+     * @param message What message should the user be shown if they're too poor?
      *
      * @return true if they have enough items false if not.
      */
     protected final boolean hasItem(Player player, double amount, int type, String message) {
-        // TODO: Make this inventory
         boolean hasEnough = player.getInventory().contains(type, (int) amount);
         if (!hasEnough) {
             userIsTooPoor(player, type, message);
@@ -30,7 +41,7 @@ public abstract class GenericBank {
     }
 
     /**
-     * Check to ensure the player has enough money
+     * Check to ensure the player has enough money.
      *
      * @param player  Check this player's bank/pocket for money.
      * @param money   How much money should we see if they have?
@@ -41,8 +52,8 @@ public abstract class GenericBank {
     protected abstract boolean hasMoney(Player player, double money, String message);
 
     /**
-     * Check to ensure the player has enough money or items. This method is intended if you want to accept items or
-     * money
+     * Check to ensure the player has enough money or items.
+     * This method is intended if you want to accept items or money.
      *
      * @param player  Check this player's bank/currently held item for money/items.
      * @param amount  How much money or how many items should we see if they have?
@@ -64,7 +75,16 @@ public abstract class GenericBank {
     }
 
     /**
-     * Convenience method that does not require a message
+     * Convenience method that does not require a message.
+     * <p>
+     * My, my, my music hits me so hard
+     * Makes me say "Oh my Lord"
+     * Thank you for blessing me
+     * With a mind to rhyme and two hype feet
+     * It feels good, when you know you're down
+     * A super dope homeboy from the Oaktown
+     * And I'm known as such
+     * And this is a beat, uh, you can't touch
      *
      * @param player Check this player's bank/currently held item for money/items.
      * @param amount How much money or how many items should we see if they have?
@@ -77,6 +97,21 @@ public abstract class GenericBank {
         return hasEnough(player, amount, type, null);
     }
 
+    /**
+     * Take the required items from the player.
+     * <p>
+     * I told you homeboy (You can't touch this)
+     * Yeah, that's how we living and you know (You can't touch this)
+     * Look at my eyes, man (You can't touch this)
+     * Yo, let me bust the funky lyrics (You can't touch this)
+     * <p>
+     * Your plugin should never reflect to call this.
+     * Just use {@link #take(org.bukkit.entity.Player, double, int)}.
+     *
+     * @param player The player to take from
+     * @param amount How much should we take
+     * @param type   What itemid should we take?
+     */
     protected final void takeItem(Player player, double amount, int type) {
         int removed = 0;
         HashMap<Integer, ItemStack> items = (HashMap<Integer, ItemStack>) player.getInventory().all(type);
@@ -97,10 +132,32 @@ public abstract class GenericBank {
         showReceipt(player, amount, type);
     }
 
+    /**
+     * Take the required amount of money from the player.
+     * <p>
+     * This is implemented by the bank that you're using.
+     * <p>
+     * Your plugin should never reflect to call this.
+     * Just use {@link #take(org.bukkit.entity.Player, double, int)}.
+     *
+     * @param player The player to take from.
+     * @param amount How much should we take.
+     */
     protected abstract void takeMoney(Player player, double amount);
 
     /**
      * Take the required items/money from the player.
+     * <p>
+     * Fresh new kicks, advance
+     * You gotta like that, now you know you wanna dance
+     * So move, outta your seat
+     * And get a fly girl and catch this beat
+     * While it's rolling, hold on
+     * Pump a little bit and let 'em know it's going on
+     * Like that, like that
+     * Cold on a mission so fall them back
+     * Let 'em know, that you're too much
+     * And this is a beat, uh, you can't touch
      *
      * @param player The player to take from
      * @param amount How much should we take
@@ -115,26 +172,15 @@ public abstract class GenericBank {
     }
 
     /**
-     * Deprecated, please use take instead.
-     * This method will be removed on 2/30/12
+     * Give the specified items/money to the player.
+     * <p>
+     * Yo, I told you (You can't touch this)
+     * Why you standing there, man? (You can't touch this)
+     * Yo, sound the bell, school is in, sucka (You can't touch this)
      *
-     * @param player The player to take from
-     * @param amount How much should we take
-     * @param type   What should we take? (-1 for money, item id for item)
-     *
-     * @deprecated since v3.1
-     */
-    @Deprecated
-    public final void pay(Player player, double amount, int type) {
-        take(player, amount, type);
-    }
-
-    /**
-     * Give the specified items/money to the player
-     *
-     * @param player the player to add to
-     * @param amount the amount to give
-     * @param type   the type of currency, -1 for money, itemID otherwise
+     * @param player The player to add to.
+     * @param amount The amount to give.
+     * @param type   The type of currency, -1 for money, itemID otherwise.
      */
     public final void give(Player player, double amount, int type) {
         if (type == -1) {
@@ -144,8 +190,32 @@ public abstract class GenericBank {
         }
     }
 
+    /**
+     * Give the specified amount of money to the player.
+     *
+     * @param player The player to add to.
+     * @param amount The amount to give.
+     */
     protected abstract void giveMoney(Player player, double amount);
 
+    /**
+     * Give the specified items/money to the player.
+     * <p>
+     * Give me a song, or rhythm
+     * Make 'em sweat, that's what I'm giving 'em
+     * Now, they know
+     * You talking about the Hammer you talking about a show
+     * That's hype, and tight
+     * Singers are sweating so pass them a wipe
+     * Or a tape, to learn
+     * What's it gonna take in the 90's to burn
+     * The charts? Legit
+     * Either work hard or you might as well quit
+     *
+     * @param player the player to add to
+     * @param amount the amount to give
+     * @param type   the type of currency, -1 for money, itemID otherwise
+     */
     protected final void giveItem(Player player, double amount, int type) {
         ItemStack item = new ItemStack(type, (int) amount);
         player.getInventory().addItem(item);
@@ -155,11 +225,17 @@ public abstract class GenericBank {
     /**
      * Transfers a specified amount of the type (-1 for currency, otherwise an item)
      * to the specified player, from the specified player
+     * <p>
+     * That's word because you know...
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     * Break it down! .......... Stop, Hammer time!
      *
-     * @param from   The player to take from
-     * @param to     The player to give to
-     * @param amount The amount to take
-     * @param type   The item id (or -1, for currency)
+     * @param from   The player to take from.
+     * @param to     The player to give to.
+     * @param amount The amount to transfer.
+     * @param type   The item id (or -1, for currency).
      */
     public final void transfer(Player from, Player to, double amount, int type) {
         if (type == -1) {
@@ -169,6 +245,13 @@ public abstract class GenericBank {
         }
     }
 
+    /**
+     * Transfers money from one player to another.
+     *
+     * @param from   The player paying.
+     * @param to     The player recieving
+     * @param amount The amount of money in the transaction.
+     */
     protected void transferMoney(Player from, Player to, double amount) {
         if (!hasMoney(from, amount, "")) {
             return;
@@ -177,6 +260,23 @@ public abstract class GenericBank {
         giveMoney(to, amount);
     }
 
+    /**
+     * Transfers an item from one player to another.
+     * <p>
+     * Go with the funk, it is said
+     * That if you can't groove to this then you probably are dead
+     * So wave your hands in the air
+     * Bust a few moves, fun your fingers through your hair
+     * This is it, for a winner
+     * Dance to this and you're gonna get thinner
+     * Move, slide your rump
+     * Just for a minute let's all do the bump, bump, bump
+     *
+     * @param from   The player sending.
+     * @param to     The player recieving.
+     * @param amount The amount of items in the transaction.
+     * @param type   The type of item in the transaction.
+     */
     protected final void transferItem(Player from, Player to, double amount, int type) {
         if (!hasEnough(from, amount, type)) {
             return;
@@ -186,8 +286,14 @@ public abstract class GenericBank {
     }
 
     /**
-     * Returns a formatted string of the given amount and type. If type is -1, will return a bank specific string like:
+     * Returns a formatted string of the given amount and type.
+     * If type is -1, will return a bank specific string like:
      * "5 Dollars" If type is != -1 will return an item string like: "1 Diamond"
+     * <p>
+     * Yeah... (You can't touch this)
+     * Look, man (You can't touch this)
+     * You better get hype, boy, because you know (You can't touch this)
+     * Ring the bell, school's back in (You can't touch this)
      *
      * @param amount The number of money/items
      * @param type   Money(-1) or item
@@ -204,8 +310,9 @@ public abstract class GenericBank {
     }
 
     /**
-     * This method is provided to enable compatability with plugins that force us to have a player to determine the
-     * currency By default it just calles getFormattedMoneyAmount
+     * Gets the formatted amount of money.
+     * <p>
+     * Example: "$5" or "7 rupees"
      *
      * @param amount The amount to format
      * @param player The player whom we are talking about
@@ -214,23 +321,39 @@ public abstract class GenericBank {
      */
     protected abstract String getFormattedMoneyAmount(Player player, double amount);
 
-    public final String getFormattedAmount(Player player, double price, int item) {
+    /**
+     * Gets the formatted amount of either an item or money.
+     * <p>
+     * Break it down! Stop, Hammer time!
+     * You can't touch this
+     * You can't touch this
+     *
+     * @param player The player to display the info to.
+     * @param amount  The amount to display.
+     * @param item   The item or -1 for money.
+     *
+     * @return A pretty string that could be: $5 or 6 DIRT.
+     */
+    public final String getFormattedAmount(Player player, double amount, int item) {
         if (item == -1) {
-            return getFormattedMoneyAmount(player, price);
+            return getFormattedMoneyAmount(player, amount);
         }
-        return getFormattedItemAmount(price, item);
+        return getFormattedItemAmount(amount, item);
 
     }
 
     /**
      * This method is called if a user does not have enough money or items. The message parameter allows you to
      * customize what the user does not have enough money for. The format follows: "Sorry but you do not have the
-     * required [funds|items] {message}" You can't touch this. My my my...
+     * required [funds|items] {message}"
+     * <p>
+     * You can't touch this
+     * You can't touch this
+     * Break it down! (Nice pants, Hammer) Stop, Hammer time!
      *
-     * @param player
-     * @param item
-     * @param message This message will appear after the sentence that follows: "{prefix}Sorry but you do not have the
-     *                required [funds|items] {message}"
+     * @param player  The player to check.
+     * @param item    The item to check for or -1 for money.
+     * @param message The message to display to the user.
      */
     protected final void userIsTooPoor(Player player, int item, String message) {
         String type = (item == -1) ? "funds" : "items";
@@ -243,23 +366,35 @@ public abstract class GenericBank {
     }
 
     /**
-     * Prints a receipt to the user, this should only be called if the econ plugin does not already output when money is
-     * taken (Essentials does this) Yo, I told ya, Can't touch this.
+     * Prints a receipt to the user.
+     * This should only be called if the econ
+     * plugin does not already output when money is
+     * taken (Essentials does this).
      *
      * @param player The player to send the receipt to
-     * @param price  The price the user was charged for a wolf
-     * @param item   The item the user was charged for a wolf (-1 is money)
+     * @param price  The price the user was charged.
+     * @param item   The item the user was charged.
      */
     protected void showReceipt(Player player, double price, int item) {
         if (receipts) {
             if (price > 0) {
-                player.sendMessage(ChatColor.DARK_GREEN + this.prefix + ChatColor.WHITE + "You have been charged " + ChatColor.GREEN + getFormattedAmount(player, price, item));
+                player.sendMessage(String.format("%s%s%s You have been charged %s%s",
+                        ChatColor.DARK_GREEN, this.prefix, ChatColor.WHITE,
+                        "You have been charged", ChatColor.GREEN, getFormattedAmount(player, price, item)));
             } else if (price < 0) {
-                player.sendMessage(ChatColor.DARK_GREEN + this.prefix + getFormattedAmount(player, (price * -1), item) + ChatColor.WHITE + " has been added to your account.");
+                player.sendMessage(String.format("%s%s%s%s%s %s",
+                        ChatColor.DARK_GREEN + this.prefix, getFormattedAmount(player, (price * -1), item),
+                        ChatColor.WHITE, "has been added to your account."));
             }
         }
     }
 
+    /**
+     * Display an error message to a user.
+     *
+     * @param player  The {@link Player} to display the error to.
+     * @param message The message to show them.
+     */
     protected void showError(Player player, String message) {
         player.sendMessage(ChatColor.DARK_RED + this.prefix + ChatColor.WHITE + message);
     }
@@ -271,10 +406,34 @@ public abstract class GenericBank {
      */
     public abstract String getEconUsed();
 
+    /**
+     * Sets what AllPay will preface it's messages with.
+     * <p>
+     * Every time you see me
+     * The Hammer's just so hype
+     * I'm dope on the floor and I'm magic on the mic
+     * Now why would I ever stop doing this?
+     *
+     * @param prefix The prefix to append to all AllPay messages.
+     */
     public final void setPrefix(String prefix) {
         this.prefix = prefix;
     }
 
+    /**
+     * Gets a pretty formatted version of a currency.
+     * <p>
+     * With others making records that just don't hit
+     * I've toured around the world, from London to the Bay
+     * It's "Hammer, go Hammer, MC Hammer, yo Hammer"
+     * And the rest can go and play
+     *
+     * @param amount           The amount of currency.
+     * @param currencySingular The string for a singular, like 'dollar'.
+     * @param currencyPlural   The string for a plural, like 'dollars'.
+     *
+     * @return A pretty string.
+     */
     protected final String formatCurrency(double amount, String currencySingular, String currencyPlural) {
         boolean inFront = false;
         // This determines (by lenght at the moment) if we should put the name before or after the amount.
@@ -291,15 +450,47 @@ public abstract class GenericBank {
         }
     }
 
-    public double getBalance(Player p, int itemId) {
+    /**
+     * Gets the balance in items or currency of a user.
+     *
+     * @param player The player to check.
+     * @param itemId The item (or -1 for money).
+     *
+     * @return The amount of something a player has.
+     */
+    public double getBalance(Player player, int itemId) {
         if (itemId == -1) {
-            return getMoneyBalance(p);
+            return getMoneyBalance(player);
         }
-        return getItemAnount(p, itemId);
+        return getItemAnount(player, itemId);
     }
 
-    protected abstract double getMoneyBalance(Player p);
+    /**
+     * Returns how much money a player has.
+     *
+     * @param player The player to check.
+     *
+     * @return The amount of money a {@link Player} has.
+     */
+    protected abstract double getMoneyBalance(Player player);
 
+    /**
+     * Returns how many items of a type a {@link Player} has.
+     * <p>
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     *
+     * @param player The {@link Player} to check.
+     * @param type   The item id to check.
+     *
+     * @return The number of items a player has.
+     */
     protected final int getItemAnount(Player player, int type) {
         // TODO: Make this inventory
         ItemStack item = player.getItemInHand();
@@ -309,7 +500,12 @@ public abstract class GenericBank {
         return item.getAmount();
     }
 
-    public void toggleReceipts(boolean val) {
-        this.receipts = val;
+    /**
+     * Allows a developer to decide if they
+     * don't want to show a recipt for a transaction.
+     * @param showRecipts Whether or not AllPay should display recipts to users.
+     */
+    public void toggleReceipts(boolean showRecipts) {
+        this.receipts = showRecipts;
     }
 }

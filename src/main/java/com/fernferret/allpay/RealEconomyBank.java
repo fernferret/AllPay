@@ -3,6 +3,9 @@ package com.fernferret.allpay;
 import fr.crafter.tickleman.RealEconomy.RealEconomy;
 import org.bukkit.entity.Player;
 
+/**
+ * The bank implementation for RealEconomy.
+ */
 public class RealEconomyBank extends GenericBank {
     private RealEconomy plugin;
 
@@ -10,12 +13,18 @@ public class RealEconomyBank extends GenericBank {
         this.plugin = plugin;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getFormattedMoneyAmount(Player player, double amount) {
         // NOTE: This plugin does not support currency plurals
         return this.formatCurrency(amount, this.plugin.getCurrency(), null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean hasMoney(Player player, double money, String message) {
         boolean result = this.plugin.getBalance(player.getName()) >= money;
@@ -25,6 +34,9 @@ public class RealEconomyBank extends GenericBank {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void takeMoney(Player player, double amount) {
         double totalmoney = this.plugin.getBalance(player.getName());
@@ -32,16 +44,25 @@ public class RealEconomyBank extends GenericBank {
         showReceipt(player, amount, -1);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getEconUsed() {
         return "RealEconomy";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected double getMoneyBalance(Player p) {
         return this.plugin.getBalance(p.getName());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void giveMoney(Player player, double amount) {
         double totalmoney = this.plugin.getBalance(player.getName());

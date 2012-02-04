@@ -3,6 +3,9 @@ package com.fernferret.allpay;
 import ca.agnate.EconXP.EconXP;
 import org.bukkit.entity.Player;
 
+/**
+ * The bank implementation for EconXP.
+ */
 public class EconXPBank extends GenericBank {
     private EconXP plugin;
 

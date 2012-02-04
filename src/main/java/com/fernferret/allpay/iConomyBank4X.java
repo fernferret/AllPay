@@ -4,17 +4,22 @@ import com.nijiko.coelho.iConomy.iConomy;
 import org.bukkit.entity.Player;
 
 /**
- * Adapter class for iConomy 4
- *
- * @author Eric Stokes
+ * The bank implementation for iConomy 4.
  */
-public class iConomyBank4X extends GenericBank {
+public class iConomyBank4X extends GenericBank { // SUPPRESS CHECKSTYLE: TypeName
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getEconUsed() {
         return "iConomy 4";
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected boolean hasMoney(Player player, double money, String message) {
         boolean result = iConomy.getBank().getAccount(player.getName()).hasEnough(money);
         if (!result) {
@@ -23,23 +28,34 @@ public class iConomyBank4X extends GenericBank {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void takeMoney(Player player, double amount) {
         iConomy.getBank().getAccount(player.getName()).subtract(amount);
         showReceipt(player, amount, -1);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected String getFormattedMoneyAmount(Player player, double amount) {
         return this.formatCurrency(amount, iConomy.getBank().getCurrency(), null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected double getMoneyBalance(Player p) {
         return iConomy.getBank().getAccount(p.getName()).getBalance();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void giveMoney(Player player, double amount) {
         iConomy.getBank().getAccount(player.getName()).add(amount);

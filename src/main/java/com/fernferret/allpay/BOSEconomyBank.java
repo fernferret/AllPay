@@ -3,6 +3,9 @@ package com.fernferret.allpay;
 import cosine.boseconomy.BOSEconomy;
 import org.bukkit.entity.Player;
 
+/**
+ * The bank implementation for BOSEconomy.
+ */
 public class BOSEconomyBank extends GenericBank {
     private BOSEconomy plugin;
 
