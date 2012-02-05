@@ -492,12 +492,12 @@ public abstract class GenericBank {
      * @return The number of items a player has.
      */
     protected final int getItemAnount(Player player, int type) {
-        // TODO: Make this inventory
-        ItemStack item = player.getItemInHand();
-        if (item.getTypeId() != type) {
-            return 0;
+        HashMap<Integer, ItemStack> items = (HashMap<Integer, ItemStack>) player.getInventory().all(type);
+        int total = 0;
+        for (int i : items.keySet()) {
+            total += player.getInventory().getItem(i).getAmount();
         }
-        return item.getAmount();
+        return total;
     }
 
     /**

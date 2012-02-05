@@ -13,10 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * AllPay is a nifty little payment wrapper class that takes the heavy lifting out of integrating payments into your
- * plugin!
- *
- * @author Eric Stokes
+ * AllPay is a nifty little payment wrapper class that takes the heavy
+ * lifting out of integrating payments into your plugin!
  */
 public class AllPay {
     private static double version;
