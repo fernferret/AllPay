@@ -378,12 +378,12 @@ public abstract class GenericBank {
     protected void showReceipt(Player player, double price, int item) {
         if (receipts) {
             if (price > 0) {
-                player.sendMessage(String.format("%s%s%s You have been charged %s%s",
+                player.sendMessage(String.format("%s%s%s%s%s %s",
                         ChatColor.DARK_GREEN, this.prefix, ChatColor.WHITE,
                         "You have been charged", ChatColor.GREEN, getFormattedAmount(player, price, item)));
             } else if (price < 0) {
-                player.sendMessage(String.format("%s%s%s%s%s %s",
-                        ChatColor.DARK_GREEN + this.prefix, getFormattedAmount(player, (price * -1), item),
+                player.sendMessage(String.format("%s%s%s%s %s",
+                        ChatColor.DARK_GREEN, this.prefix, getFormattedAmount(player, (price * -1), item),
                         ChatColor.WHITE, "has been added to your account."));
             }
         }
