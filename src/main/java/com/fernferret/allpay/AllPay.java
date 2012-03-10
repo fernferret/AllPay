@@ -22,7 +22,7 @@ public class AllPay {
     /**
      * This string is used when logging allpay versions.
      */
-    protected final String logPrefix = "[AllPay] - Version " + version;
+    protected String logPrefix = "";
 
     /**
      * This is the logger we're using to show console output.
@@ -45,7 +45,7 @@ public class AllPay {
         } catch (IOException e) {
             this.logBadAllPay(plugin);
         }
-
+        this.logPrefix = "[AllPay] - Version " + version;
         this.plugin = plugin;
         this.prefix = prefix;
     }
