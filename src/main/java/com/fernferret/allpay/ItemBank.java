@@ -52,6 +52,11 @@ public class ItemBank extends GenericBank {
         return "Simple Item Economy";
     }
 
+    @Override
+    protected boolean setMoneyBalance(Player player, double amount) {
+        return false;
+    }
+
     /**
      * {@inheritDoc}
      */
