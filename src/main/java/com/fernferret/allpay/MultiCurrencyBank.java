@@ -17,6 +17,19 @@ public class MultiCurrencyBank extends GenericBank {
     }
 
     /**
+     * Sets how much money a player has.
+     *
+     * @param player The player to check.
+     *
+     * @return True if the set was successful.
+     */
+    @Override
+    protected boolean setMoneyBalance(Player player, double amount) {
+        CurrencyList.setValue(((String) CurrencyList.maxCurrency(player.getName())[0]), player.getName(), amount);
+        return true;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

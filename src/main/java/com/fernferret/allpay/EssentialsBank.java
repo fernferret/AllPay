@@ -16,6 +16,19 @@ public class EssentialsBank extends GenericBank {
     }
 
     @Override
+    protected boolean setMoneyBalance(Player player, double amount) {
+        try {
+            Economy.setMoney(player.getName(), amount);
+            return true;
+        } catch (UserDoesNotExistException e) {
+            showError(player, "You don't have an account!");
+        } catch (NoLoanPermittedException e) {
+            showError(player, "Your bank doesn't allow loans!");
+        }
+        return false;
+    }
+
+    @Override
     public String getFormattedMoneyAmount(Player player, double amount) {
         return Economy.format(amount);
     }

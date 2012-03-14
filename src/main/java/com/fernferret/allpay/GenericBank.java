@@ -451,6 +451,53 @@ public abstract class GenericBank {
     }
 
     /**
+     * Sets the balance in items or currency of a user.
+     *
+     * @param player the player to check.
+     * @param itemId the item (or -1 for money).
+     *
+     * @return True if success; false if fail.
+     */
+    public boolean setBalance(Player player, int itemId, double amount) {
+        if (itemId == -1) {
+            return setMoneyBalance(player, amount);
+        }
+        return setItemAmount(player, itemId, amount);
+    }
+
+    /**
+     * Sets how much money a player has.
+     *
+     * @param player The player to check.
+     *
+     * @return True if the set was successful.
+     */
+    protected abstract boolean setMoneyBalance(Player player, double amount);
+
+    /**
+     * Sets how many items of a type a {@link Player} has.
+     * <p>
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     * You can't touch this
+     *
+     * @param player The {@link Player} to check.
+     * @param type   The item id to check.
+     *
+     * @return True if success (always).
+     */
+    protected final boolean setItemAmount(Player player, int type, double amount) {
+        int numberOfItems = this.getItemAmount(player, type);
+        if (numberOfItems > amount) {
+            this.takeItem(player, numberOfItems - amount, type);
+        } else if (numberOfItems < amount) {
+            this.giveItem(player, amount - numberOfItems, type);
+        }
+        return true;
+    }
+
+    /**
      * Gets the balance in items or currency of a user.
      *
      * @param player The player to check.
@@ -462,7 +509,7 @@ public abstract class GenericBank {
         if (itemId == -1) {
             return getMoneyBalance(player);
         }
-        return getItemAnount(player, itemId);
+        return getItemAmount(player, itemId);
     }
 
     /**
@@ -475,12 +522,16 @@ public abstract class GenericBank {
     protected abstract double getMoneyBalance(Player player);
 
     /**
+     * @deprecated This was a typo, use getItemAmount.
+     */
+    @Deprecated
+    protected final int getItemAnount(Player player, int type) {
+        return this.getItemAmount(player, type);
+    }
+
+    /**
      * Returns how many items of a type a {@link Player} has.
      * <p>
-     * You can't touch this
-     * You can't touch this
-     * You can't touch this
-     * You can't touch this
      * You can't touch this
      * You can't touch this
      * You can't touch this
@@ -491,7 +542,7 @@ public abstract class GenericBank {
      *
      * @return The number of items a player has.
      */
-    protected final int getItemAnount(Player player, int type) {
+    protected final int getItemAmount(Player player, int type) {
         HashMap<Integer, ItemStack> items = (HashMap<Integer, ItemStack>) player.getInventory().all(type);
         int total = 0;
         for (int i : items.keySet()) {

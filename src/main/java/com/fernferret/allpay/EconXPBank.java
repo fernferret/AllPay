@@ -39,6 +39,12 @@ public class EconXPBank extends GenericBank {
     }
 
     @Override
+    protected boolean setMoneyBalance(Player player, double amount) {
+        this.plugin.setExp(player, (int) amount);
+        return true;
+    }
+
+    @Override
     protected double getMoneyBalance(Player p) {
         return this.plugin.getExp(p);
     }

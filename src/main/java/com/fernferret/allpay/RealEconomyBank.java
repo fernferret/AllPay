@@ -52,6 +52,12 @@ public class RealEconomyBank extends GenericBank {
         return "RealEconomy";
     }
 
+    @Override
+    protected boolean setMoneyBalance(Player player, double amount) {
+        this.plugin.setBalance(player.getName(), amount);
+        return true;
+    }
+
     /**
      * {@inheritDoc}
      */

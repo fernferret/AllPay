@@ -16,6 +16,12 @@ public class iConomyBank5X extends GenericBank { // SUPPRESS CHECKSTYLE: TypeNam
         return "iConomy 5";
     }
 
+    @Override
+    protected boolean setMoneyBalance(Player player, double amount) {
+        iConomy.getAccount(player.getName()).getHoldings().set(amount);
+        return true;
+    }
+
     /**
      * {@inheritDoc}
      */

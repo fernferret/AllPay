@@ -40,6 +40,12 @@ public class BOSEconomyBank extends GenericBank {
     }
 
     @Override
+    protected boolean setMoneyBalance(Player player, double amount) {
+        this.plugin.setPlayerMoney(player.getName(), (int) amount, true);
+        return true;
+    }
+
+    @Override
     protected double getMoneyBalance(Player p) {
         return this.plugin.getPlayerMoney(p.getName());
     }
