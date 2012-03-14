@@ -455,6 +455,7 @@ public abstract class GenericBank {
      *
      * @param player the player to check.
      * @param itemId the item (or -1 for money).
+     * @param amount what to set the balance to.
      *
      * @return True if success; false if fail.
      */
@@ -469,6 +470,7 @@ public abstract class GenericBank {
      * Sets how much money a player has.
      *
      * @param player The player to check.
+     * @param amount what to set the balance to.
      *
      * @return True if the set was successful.
      */
@@ -484,6 +486,7 @@ public abstract class GenericBank {
      *
      * @param player The {@link Player} to check.
      * @param type   The item id to check.
+     * @param amount what to set the balance to.
      *
      * @return True if success (always).
      */
@@ -523,6 +526,9 @@ public abstract class GenericBank {
 
     /**
      * @deprecated This was a typo, use getItemAmount.
+     * @param player deprecated
+     * @param type deprecated
+     * @return deprecated stuff.
      */
     @Deprecated
     protected final int getItemAnount(Player player, int type) {
