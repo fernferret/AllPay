@@ -1,7 +1,8 @@
 package com.fernferret.allpay;
 
-import cosine.boseconomy.BOSEconomy;
 import org.bukkit.entity.Player;
+
+import cosine.boseconomy.BOSEconomy;
 
 /**
  * The bank implementation for BOSEconomy.
@@ -20,7 +21,7 @@ public class BOSEconomyBank extends GenericBank {
 
     @Override
     public boolean hasMoney(Player player, double money, String message) {
-        boolean result = this.plugin.getPlayerMoney(player.getName()) >= money;
+        boolean result = this.plugin.getPlayerMoneyDouble(player.getName()) >= money;
         if (!result) {
             userIsTooPoor(player, -1, message);
         }
@@ -29,7 +30,7 @@ public class BOSEconomyBank extends GenericBank {
 
     @Override
     public void takeMoney(Player player, double amount) {
-        int negativePrice = (int) (-1 * Math.abs(amount));
+        double negativePrice = (-1 * Math.abs(amount));
         this.plugin.addPlayerMoney(player.getName(), negativePrice, true);
         showReceipt(player, amount, -1);
     }
@@ -41,18 +42,18 @@ public class BOSEconomyBank extends GenericBank {
 
     @Override
     protected boolean setMoneyBalance(Player player, double amount) {
-        this.plugin.setPlayerMoney(player.getName(), (int) amount, true);
+        this.plugin.setPlayerMoney(player.getName(), amount, true);
         return true;
     }
 
     @Override
     protected double getMoneyBalance(Player p) {
-        return this.plugin.getPlayerMoney(p.getName());
+        return this.plugin.getPlayerMoneyDouble(p.getName());
     }
 
     @Override
     protected void giveMoney(Player player, double amount) {
-        this.plugin.addPlayerMoney(player.getName(), (int) amount, true);
+        this.plugin.addPlayerMoney(player.getName(), amount, true);
         showReceipt(player, (amount * -1), -1);
     }
 
