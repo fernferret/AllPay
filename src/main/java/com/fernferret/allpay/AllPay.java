@@ -5,6 +5,7 @@ import cosine.boseconomy.BOSEconomy;
 import fr.crafter.tickleman.RealEconomy.RealEconomy;
 import fr.crafter.tickleman.RealPlugin.RealPlugin;
 import org.bukkit.plugin.Plugin;
+import org.melonbrew.fe.Fe;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class AllPay {
     private Plugin plugin;
     private GenericBank bank;
     private static final String[] VALID_ECON_PLUGINS =
-    {"Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency", "EconXP"};
+    {"Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency", "EconXP", "Fe"};
 
     public AllPay(Plugin plugin, String prefix) {
         try {
@@ -78,6 +79,7 @@ public class AllPay {
         this.loadRealShopEconomy();
         this.loadEssentialsEconomoy();
         this.loadEconXPEconomy();
+        this.loadFeconomy();
         this.loadDefaultItemEconomy();
         this.bank.setPrefix(this.prefix);
         return this.bank;
@@ -142,6 +144,16 @@ public class AllPay {
             if (econXPPlugin != null) {
                 this.bank = new EconXPBank((EconXP) econXPPlugin);
                 LOGGER.info(logPrefix + " - hooked into EconXP for " + this.plugin.getDescription().getFullName());
+            }
+        }
+    }
+
+    private void loadFeconomy() {
+        if (this.bank == null && !(this.bank instanceof FeconomyBank)) {
+            Plugin feconplugin = this.plugin.getServer().getPluginManager().getPlugin("Fe");
+            if (feconplugin != null) {
+                this.bank = new FeconomyBank((Fe) feconplugin);
+                LOGGER.info(logPrefix + " - hooked into Fe-conomy for " + this.plugin.getDescription().getFullName());
             }
         }
     }
