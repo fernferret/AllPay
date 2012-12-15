@@ -19,6 +19,10 @@
             <id>Official Bukkit</id>
             <url>http://repo.bukkit.org/content/repositories/public</url>
         </repository>
+        <repository>
+            <id>krinsoft</id>
+            <url>http://files.krinsoft.net:8085/nexus/content/groups/public</url>
+        </repository>
     </repositories>
     <build>
         <defaultGoal>clean install</defaultGoal>
@@ -146,6 +150,7 @@
         </dependency>
         <!-- End of Economy Dependencies -->
     </dependencies>
+
     <distributionManagement>
         <repository>
             <id>OnARandomBox</id>
