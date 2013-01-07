@@ -33,7 +33,7 @@ public class AllPay {
     private Plugin plugin;
     private GenericBank bank;
     private static final String[] VALID_ECON_PLUGINS =
-    {"Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency", "EconXP", "Fe"};
+    {"Essentials", "RealShop", "BOSEconomy", "iConomy", "MultiCurrency", "EconXP", "Fe", "Craftconomy"};
 
     public AllPay(Plugin plugin, String prefix) {
         try {
@@ -80,6 +80,7 @@ public class AllPay {
         this.loadEssentialsEconomoy();
         this.loadEconXPEconomy();
         this.loadFeconomy();
+	this.loadCraftconomy3();
         this.loadDefaultItemEconomy();
         this.bank.setPrefix(this.prefix);
         return this.bank;
@@ -156,6 +157,16 @@ public class AllPay {
                 LOGGER.info(logPrefix + " - hooked into Fe-conomy for " + this.plugin.getDescription().getFullName());
             }
         }
+    }
+    
+    private void loadCraftconomy3() {
+	 if (this.bank == null && !(this.bank instanceof Craftconomy3Bank)) {
+            Plugin craftconomy3Test = this.plugin.getServer().getPluginManager().getPlugin("Craftconomy3");
+            if (craftconomy3Test != null && craftconomy3Test instanceof com.greatmancode.craftconomy3.BukkitLoader) {
+		this.bank = new Craftconomy3Bank();
+                LOGGER.info(logPrefix + " - hooked into Craftconomy3 for " + this.plugin.getDescription().getFullName());
+	    }
+        }   
     }
 
     private void loadDefaultItemEconomy() {
