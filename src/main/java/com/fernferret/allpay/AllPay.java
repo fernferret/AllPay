@@ -5,7 +5,7 @@ import cosine.boseconomy.BOSEconomy;
 import fr.crafter.tickleman.RealEconomy.RealEconomy;
 import fr.crafter.tickleman.RealPlugin.RealPlugin;
 import org.bukkit.plugin.Plugin;
-import org.melonbrew.fe.Fe;
+import org.melonbrew.fe.loaders.FeBukkitLoader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -152,7 +152,17 @@ public class AllPay {
         if (this.bank == null && !(this.bank instanceof FeconomyBank)) {
             Plugin feconplugin = this.plugin.getServer().getPluginManager().getPlugin("Fe");
             if (feconplugin != null) {
-                this.bank = new FeconomyBank((Fe) feconplugin);
+                try {
+                    this.bank = new FeconomyBank((FeBukkitLoader) feconplugin);
+                } catch (NoClassDefFoundError e) {
+                    LOGGER.log(Level.SEVERE, "No such class '" + e.getLocalizedMessage() + "': Unsupported version of Fe-economy!");
+                    return;
+                } catch (ClassCastException e) {
+                    return;
+                } catch (IncompleteBankException e) {
+                    LOGGER.log(Level.SEVERE, e.getLocalizedMessage(), e);
+                    return;
+                }
                 LOGGER.info(logPrefix + " - hooked into Fe-conomy for " + this.plugin.getDescription().getFullName());
             }
         }

@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fernferret.allpay</groupId>
     <artifactId>AllPay</artifactId>
-    <version>11</version>
+    <version>12</version>
     <name>AllPay</name>
     <description>A payment library for Bukkit.</description>
     <properties>
@@ -145,7 +145,7 @@
         <dependency>
             <groupId>org.melonbrew</groupId>
             <artifactId>Fe</artifactId>
-            <version>0.5</version>
+            <version>0.7</version>
             <type>jar</type>
         </dependency>
         <!-- End of Economy Dependencies -->
