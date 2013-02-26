@@ -8,18 +8,7 @@
     <description>A payment library for Bukkit.</description>
     <packaging>pom</packaging>
     <modules>
-        <module>commons</module>
-        <module>fe-0.6</module>
-        <module>fe-0.7</module>
-        <module>boseconomy</module>
-        <module>econxp</module>
-        <module>realeconomy</module>
-        <module>essentialsbank</module>
-        <module>iconomy4</module>
-        <module>iconomy5</module>
-        <module>iconomy6</module>
-        <module>multicurrency</module>
-        <module>itemecon</module>
+        <module>modules</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,16 +16,16 @@
     </properties>
     <repositories>
         <repository>
+            <id>krinsoft</id>
+            <url>http://files.krinsoft.net:8085/nexus/content/groups/public</url>
+        </repository>
+        <repository>
             <id>onarandombox</id>
             <url>http://repo.onarandombox.com/content/groups/public</url>
         </repository>
         <repository>
             <id>Official Bukkit</id>
             <url>http://repo.bukkit.org/content/repositories/public</url>
-        </repository>
-        <repository>
-            <id>krinsoft</id>
-            <url>http://files.krinsoft.net:8085/nexus/content/groups/public</url>
         </repository>
     </repositories>
     <build>
@@ -64,7 +53,6 @@
                     </archive>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -74,7 +62,6 @@
                     <configLocation>${project.basedir}/config/ap_checks.xml</configLocation>
                 </configuration>
             </plugin>
-            -->
         </plugins>
         <resources>
             <resource>
@@ -92,18 +79,17 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
-            <groupId>com.fernferret.allpay.commons</groupId>
-            <artifactId>commons</artifactId>
+            <groupId>com.fernferret.allpay</groupId>
+            <artifactId>aggregate-dist</artifactId>
             <version>1</version>
         </dependency>
     </dependencies>
 
     <distributionManagement>
         <repository>
-            <id>OnARandomBox</id>
-            <url>http://repo.onarandombox.com/content/repositories/bukkit-thirdparty</url>
+            <id>ks-releases</id>
+            <url>http://files.krinsoft.net:8085/nexus/content/repositories/ks-releases</url>
         </repository>
     </distributionManagement>
 </project>
