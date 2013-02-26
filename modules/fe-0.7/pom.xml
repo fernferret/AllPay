@@ -8,6 +8,34 @@
     <artifactId>fe-0.7</artifactId>
     <version>1</version>
 
+    <repositories>
+        <repository>
+            <id>krinsoft</id>
+            <url>http://files.krinsoft.net:8085/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>onarandombox</id>
+            <url>http://repo.onarandombox.com/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>Official Bukkit</id>
+            <url>http://repo.bukkit.org/content/repositories/public</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.melonbrew</groupId>

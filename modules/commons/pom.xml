@@ -7,14 +7,34 @@
     <groupId>com.fernferret.allpay.commons</groupId>
     <artifactId>commons</artifactId>
     <version>1</version>
-    <packaging>pom</packaging>
 
     <repositories>
         <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public</url>
+            <id>krinsoft</id>
+            <url>http://files.krinsoft.net:8085/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>onarandombox</id>
+            <url>http://repo.onarandombox.com/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>Official Bukkit</id>
+            <url>http://repo.bukkit.org/content/repositories/public</url>
         </repository>
     </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
