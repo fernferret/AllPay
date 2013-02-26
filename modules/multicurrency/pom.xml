@@ -1,14 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.fernferret.allpay</groupId>
-    <artifactId>AllPay-Aggregator</artifactId>
-    <version>1</version>
-    <packaging>pom</packaging>
 
-    <modules>
-        <module>modules</module>
-    </modules>
+    <groupId>com.fernferret.allpay.economy</groupId>
+    <artifactId>multicurrency</artifactId>
+    <version>1</version>
 
     <repositories>
         <repository>
@@ -38,11 +36,19 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-        <repository>
-            <id>ks-releases</id>
-            <url>http://files.krinsoft.net:8085/nexus/content/repositories/ks-releases</url>
-        </repository>
-    </distributionManagement>
+    <dependencies>
+        <dependency>
+            <groupId>me.ashtheking.currency</groupId>
+            <artifactId>MultiCurrency</artifactId>
+            <version>0.09</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fernferret.allpay.commons</groupId>
+            <artifactId>commons</artifactId>
+            <version>1</version>
+        </dependency>
+    </dependencies>
 
 </project>
