@@ -1,17 +1,26 @@
 package com.fernferret.allpay;
 
 import ca.agnate.EconXP.EconXP;
+import com.fernferret.allpay.commons.GenericBank;
+import com.fernferret.allpay.economy.BOSEconomyBank;
+import com.fernferret.allpay.economy.EconXPBank;
+import com.fernferret.allpay.economy.EssentialsBank;
+import com.fernferret.allpay.economy.FeconomyBank6;
+import com.fernferret.allpay.economy.FeconomyBank7;
+import com.fernferret.allpay.economy.ItemBank;
+import com.fernferret.allpay.economy.RealEconomyBank;
+import com.fernferret.allpay.economy.iConomyBank4X;
+import com.fernferret.allpay.economy.iConomyBank5X;
+import com.fernferret.allpay.economy.iConomyBank6X;
 import cosine.boseconomy.BOSEconomy;
 import fr.crafter.tickleman.RealEconomy.RealEconomy;
 import fr.crafter.tickleman.RealPlugin.RealPlugin;
 import org.bukkit.plugin.Plugin;
-import org.melonbrew.fe.loaders.FeBukkitLoader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * AllPay is a nifty little payment wrapper class that takes the heavy
@@ -25,10 +34,6 @@ public class AllPay {
      */
     protected String logPrefix = "";
 
-    /**
-     * This is the logger we're using to show console output.
-     */
-    protected static final Logger LOGGER = Logger.getLogger("Minecraft");
     private String prefix;
     private Plugin plugin;
     private GenericBank bank;
@@ -108,62 +113,61 @@ public class AllPay {
                 Plugin essentialsPlugin = this.plugin.getServer().getPluginManager().getPlugin("Essentials");
                 if (essentialsPlugin != null) {
                     this.bank = new EssentialsBank();
-                    LOGGER.info(logPrefix + " - hooked into Essentials Economy for " + this.plugin.getDescription().getFullName());
+                    this.plugin.getLogger().info(logPrefix + " - hooked into Essentials Economy for " + this.plugin.getDescription().getFullName());
                 }
             } catch (Exception e) {
-                LOGGER.warning(logPrefix + "You are using a VERY old version of Essentials. Please upgrade it.");
+                this.plugin.getLogger().warning(logPrefix + "You are using a VERY old version of Essentials. Please upgrade it.");
             }
         }
     }
 
     private void loadRealShopEconomy() {
-        if (this.bank == null && !(this.bank instanceof EssentialsBank)) {
+        if (this.bank == null) {
             Plugin realShopPlugin = this.plugin.getServer().getPluginManager().getPlugin("RealShop");
             if (realShopPlugin != null) {
                 RealEconomy realEconPlugin = new RealEconomy((RealPlugin) realShopPlugin);
-                LOGGER.info(logPrefix + " - hooked into RealEconomy for " + this.plugin.getDescription().getFullName());
+                this.plugin.getLogger().info(logPrefix + " - hooked into RealEconomy for " + this.plugin.getDescription().getFullName());
                 this.bank = new RealEconomyBank(realEconPlugin);
             }
         }
     }
 
     private void loadBOSEconomy() {
-        if (this.bank == null && !(this.bank instanceof EssentialsBank)) {
+        if (this.bank == null) {
             Plugin boseconPlugin = this.plugin.getServer().getPluginManager().getPlugin("BOSEconomy");
             if (boseconPlugin != null) {
 
                 this.bank = new BOSEconomyBank((BOSEconomy) boseconPlugin);
-                LOGGER.info(logPrefix + " - hooked into BOSEconomy for " + this.plugin.getDescription().getFullName());
+                this.plugin.getLogger().info(logPrefix + " - hooked into BOSEconomy for " + this.plugin.getDescription().getFullName());
             }
         }
     }
 
     private void loadEconXPEconomy() {
-        if (this.bank == null && !(this.bank instanceof EssentialsBank)) {
+        if (this.bank == null) {
             Plugin econXPPlugin = this.plugin.getServer().getPluginManager().getPlugin("EconXP");
             if (econXPPlugin != null) {
                 this.bank = new EconXPBank((EconXP) econXPPlugin);
-                LOGGER.info(logPrefix + " - hooked into EconXP for " + this.plugin.getDescription().getFullName());
+                this.plugin.getLogger().info(logPrefix + " - hooked into EconXP for " + this.plugin.getDescription().getFullName());
             }
         }
     }
 
     private void loadFeconomy() {
-        if (this.bank == null && !(this.bank instanceof FeconomyBank)) {
+        if (this.bank == null) {
             Plugin feconplugin = this.plugin.getServer().getPluginManager().getPlugin("Fe");
             if (feconplugin != null) {
                 try {
-                    this.bank = new FeconomyBank((FeBukkitLoader) feconplugin);
-                } catch (NoClassDefFoundError e) {
-                    LOGGER.log(Level.SEVERE, "No such class '" + e.getLocalizedMessage() + "': Unsupported version of Fe-economy!");
-                    return;
-                } catch (ClassCastException e) {
-                    return;
-                } catch (IncompleteBankException e) {
-                    LOGGER.log(Level.SEVERE, e.getLocalizedMessage(), e);
-                    return;
+                    Class.forName("org.melonbrew.fe.loaders.FeBukkitLoader");
+                    this.bank = new FeconomyBank7(feconplugin);
+                } catch (ClassNotFoundException e1) {
+                    try {
+                        this.bank = new FeconomyBank6(feconplugin);
+                    } catch (ClassCastException e2) {
+                        return;
+                    }
                 }
-                LOGGER.info(logPrefix + " - hooked into Fe-conomy for " + this.plugin.getDescription().getFullName());
+                this.plugin.getLogger().info(logPrefix + " - hooked into Fe-economy for " + this.plugin.getDescription().getFullName());
             }
         }
     }
@@ -171,7 +175,7 @@ public class AllPay {
     private void loadDefaultItemEconomy() {
         if (this.bank == null) {
             this.bank = new ItemBank();
-            LOGGER.info(logPrefix + " - using only an item based economy for " + this.plugin.getDescription().getFullName());
+            this.plugin.getLogger().info(logPrefix + " - using only an item based economy for " + this.plugin.getDescription().getFullName());
         }
     }
 
@@ -181,7 +185,7 @@ public class AllPay {
             try {
                 if (iConomyTest != null && iConomyTest instanceof com.iCo6.iConomy) {
                     this.bank = new iConomyBank6X();
-                    LOGGER.info(logPrefix + " - hooked into iConomy 6 for " + this.plugin.getDescription().getFullName());
+                    this.plugin.getLogger().info(logPrefix + " - hooked into iConomy 6 for " + this.plugin.getDescription().getFullName());
                 }
             } catch (NoClassDefFoundError e) {
                 loadiConomy5X(iConomyTest);
@@ -193,7 +197,7 @@ public class AllPay {
         try {
             if (iConomyTest != null && iConomyTest instanceof com.iConomy.iConomy) {
                 this.bank = new iConomyBank5X();
-                LOGGER.info(logPrefix + " - hooked into iConomy 5 for " + this.plugin.getDescription().getFullName());
+                this.plugin.getLogger().info(logPrefix + " - hooked into iConomy 5 for " + this.plugin.getDescription().getFullName());
             }
         } catch (NoClassDefFoundError ex) {
             if (iConomyTest != null) {
@@ -206,7 +210,7 @@ public class AllPay {
         com.nijiko.coelho.iConomy.iConomy iConomyPlugin = (com.nijiko.coelho.iConomy.iConomy) this.plugin.getServer().getPluginManager().getPlugin("iConomy");
         if (iConomyPlugin != null) {
             this.bank = new iConomyBank4X();
-            LOGGER.info(logPrefix + " - hooked into iConomy 4 for " + this.plugin.getDescription().getFullName());
+            this.plugin.getLogger().info(logPrefix + " - hooked into iConomy 4 for " + this.plugin.getDescription().getFullName());
         }
     }
 
