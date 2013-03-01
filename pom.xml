@@ -38,11 +38,4 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-        <repository>
-            <id>ks-releases</id>
-            <url>http://files.krinsoft.net:8085/nexus/content/repositories/ks-releases</url>
-        </repository>
-    </distributionManagement>
-
 </project>

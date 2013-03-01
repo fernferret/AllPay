@@ -154,8 +154,8 @@
 
     <distributionManagement>
         <repository>
-            <id>ks-releases</id>
-            <url>http://files.krinsoft.net:8085/nexus/content/repositories/ks-releases</url>
+            <id>OnARandomBox</id>
+            <url>http://repo.onarandombox.com/content/repositories/bukkit-thirdparty</url>
         </repository>
     </distributionManagement>
 
