@@ -36,28 +36,36 @@ public class FeconomyBank7 extends GenericBank {
 
     @Override
     protected boolean hasMoney(Player player, double money, String message) {
-        return this.service.getShortenedAccount(player.getName()).getMoney() >= money;
+        return this.service.getAPI()
+                .getAccount(player.getName()) // object descent for NPE detection
+                .has(money);
     }
 
     @Override
     protected void takeMoney(Player player, double amount) {
-        this.service.getShortenedAccount(player.getName()).withdraw(amount);
+        this.service.getAPI()
+                .getAccount(player.getName())
+                .withdraw(amount);
     }
 
     @Override
     protected void giveMoney(Player player, double amount) {
-        this.service.getShortenedAccount(player.getName()).deposit(amount);
+        this.service.getAPI()
+                .getAccount(player.getName())
+                .deposit(amount);
     }
 
     @Override
     protected String getFormattedMoneyAmount(Player player, double amount) {
-        return this.service.getAPI().format(amount);
+        return this.service.getAPI().formatNoColor(amount);
     }
 
     @Override
     protected boolean setMoneyBalance(Player player, double amount) {
         try {
-            this.service.getShortenedAccount(player.getName()).setMoney(amount);
+            this.service.getAPI()
+                    .getAccount(player.getName())
+                    .setMoney(amount);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -67,6 +75,8 @@ public class FeconomyBank7 extends GenericBank {
 
     @Override
     protected double getMoneyBalance(Player player) {
-        return this.service.getShortenedAccount(player.getName()).getMoney();
+        return this.service.getAPI()
+                .getAccount(player.getName())
+                .getMoney();
     }
 }
