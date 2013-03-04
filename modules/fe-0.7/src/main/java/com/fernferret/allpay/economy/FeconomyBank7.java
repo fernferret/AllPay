@@ -78,7 +78,7 @@ public class FeconomyBank7 extends GenericBank {
     protected double getMoneyBalance(Player player) {
         Account acc = this.service.getAPI().getAccount(player.getName());
         if (acc != null) {
-            acc.getMoney();
+            return acc.getMoney();
         }
         return 0D;
     }
