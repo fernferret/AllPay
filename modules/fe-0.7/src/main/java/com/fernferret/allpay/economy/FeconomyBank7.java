@@ -5,6 +5,7 @@ import com.fernferret.allpay.commons.IncompleteBankException;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.melonbrew.fe.Fe;
+import org.melonbrew.fe.database.Account;
 import org.melonbrew.fe.loaders.FeBukkitLoader;
 
 import java.lang.reflect.Field;
@@ -36,26 +37,27 @@ public class FeconomyBank7 extends GenericBank {
 
     @Override
     protected boolean hasMoney(Player player, double money, String message) {
-        return this.service.getAPI()
-                .getAccount(player.getName()) // object descent for NPE detection
-                .has(money);
+        Account acc = this.service.getAPI().getAccount(player.getName());
+        return acc != null && acc.has(money);
     }
 
     @Override
     protected void takeMoney(Player player, double amount) {
-        this.service.getAPI()
-                .getAccount(player.getName())
-                .withdraw(amount);
+        Account acc = this.service.getAPI().getAccount(player.getName());
+        if (acc != null) {
+            acc.withdraw(amount);
+        }
     }
 
     @Override
     protected void giveMoney(Player player, double amount) {
-        this.service.getAPI()
-                .getAccount(player.getName())
-                .deposit(amount);
+        Account acc = this.service.getAPI().getAccount(player.getName());
+        if (acc != null) {
+            acc.deposit(amount);
+        }
     }
 
-    @Override
+        @Override
     protected String getFormattedMoneyAmount(Player player, double amount) {
         return this.service.getAPI().formatNoColor(amount);
     }
@@ -63,9 +65,8 @@ public class FeconomyBank7 extends GenericBank {
     @Override
     protected boolean setMoneyBalance(Player player, double amount) {
         try {
-            this.service.getAPI()
-                    .getAccount(player.getName())
-                    .setMoney(amount);
+            Account acc = this.service.getAPI().getAccount(player.getName());
+            acc.setMoney(amount);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -75,8 +76,10 @@ public class FeconomyBank7 extends GenericBank {
 
     @Override
     protected double getMoneyBalance(Player player) {
-        return this.service.getAPI()
-                .getAccount(player.getName())
-                .getMoney();
+        Account acc = this.service.getAPI().getAccount(player.getName());
+        if (acc != null) {
+            acc.getMoney();
+        }
+        return 0D;
     }
 }
