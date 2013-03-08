@@ -6,7 +6,7 @@
 
     <groupId>com.fernferret.allpay</groupId>
     <artifactId>AllPay</artifactId>
-    <version>13</version>
+    <version>14</version>
     <name>AllPay</name>
     <description>A payment library for Bukkit.</description>
 
